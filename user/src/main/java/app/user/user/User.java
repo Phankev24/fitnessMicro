@@ -36,4 +36,11 @@ public class User {
         this.password = password;
         this.phoneNumber = phoneNumber;
     }
+
+    @PrePersist
+    public void genereateUuid(){
+        if (this.externalUserId == null){
+            this.externalUserId = UUID.randomUUID();
+        }
+    }
 }
