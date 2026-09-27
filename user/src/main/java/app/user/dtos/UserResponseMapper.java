@@ -19,5 +19,4 @@ public class UserResponseMapper {
                 user.getPhoneNumber()
         );
     }
-
 }

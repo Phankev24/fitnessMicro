@@ -6,7 +6,9 @@ import app.user.dtos.UserResponseDto;
 import app.user.dtos.UserResponseMapper;
 import app.user.user.User;
 import app.user.user.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -35,10 +37,15 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 
-
     public UserResponseDto createUser(UserCreateDto userCreateDto){
         User userEntity = userCreateMapper.toEntity(userCreateDto);
         User savedUser = userRepository.save(userEntity);
         return userResponseMapper.toDTO(savedUser);
+    }
+
+    public void deleteUser(Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found: " + id));
+        userRepository.delete(user);
     }
 }
