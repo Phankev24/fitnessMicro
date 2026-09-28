@@ -1,9 +1,6 @@
 package app.user.service;
 
-import app.user.dtos.UserCreateDto;
-import app.user.dtos.UserCreateMapper;
-import app.user.dtos.UserResponseDto;
-import app.user.dtos.UserResponseMapper;
+import app.user.dtos.*;
 import app.user.user.User;
 import app.user.user.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -41,6 +38,31 @@ public class UserService {
         User userEntity = userCreateMapper.toEntity(userCreateDto);
         User savedUser = userRepository.save(userEntity);
         return userResponseMapper.toDTO(savedUser);
+    }
+
+    public UserResponseDto updateUser(Long id, UserUpdateDto userUpdateDto){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with this id" + id));
+
+        if(userUpdateDto.firstName() != null){
+            user.setFirstName(userUpdateDto.firstName());
+        }
+
+        if(userUpdateDto.lastName() != null){
+            user.setLastName(userUpdateDto.lastName());
+        }
+
+        if(userUpdateDto.email() != null){
+            user.setEmail(userUpdateDto.email());
+        }
+
+        if(userUpdateDto.phoneNumber() != null){
+            user.setPhoneNumber(userUpdateDto.phoneNumber());
+        }
+
+        User upatedUser = userRepository.save(user);
+
+        return userResponseMapper.toDTO(upatedUser);
     }
 
     public void deleteUser(Long id){

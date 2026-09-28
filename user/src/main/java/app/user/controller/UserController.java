@@ -2,6 +2,7 @@ package app.user.controller;
 
 import app.user.dtos.UserCreateDto;
 import app.user.dtos.UserResponseDto;
+import app.user.dtos.UserUpdateDto;
 import app.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,13 @@ public class UserController {
     public ResponseEntity<UserResponseDto> createUser(@RequestBody UserCreateDto userCreateDto){
         UserResponseDto createdUser = userService.createUser(userCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id, @RequestBody UserUpdateDto userUpdateDto){
+        UserResponseDto updatedUser = userService.updateUser(id, userUpdateDto);
+
+        return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("/{id}")
