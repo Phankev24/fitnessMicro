@@ -25,10 +25,11 @@ public class Workout {
     @Enumerated(EnumType.STRING)
     private WorkoutType workoutType;
 
-    public Workout(WorkoutType workoutType, LocalDateTime workoutDateTime, String workoutName) {
+    public Workout(WorkoutType workoutType, LocalDateTime workoutDateTime, String workoutName, UUID externalWorkoutId) {
         this.workoutType = workoutType;
         this.workoutDateTime = workoutDateTime;
         this.workoutName = workoutName;
+        this.externalWorkoutId = externalWorkoutId;
     }
 
     @PrePersist

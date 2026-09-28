@@ -6,5 +6,4 @@ import java.util.List;
 import java.util.UUID;
 
 public interface WorkoutRepository extends JpaRepository<Workout, Long> {
-    List<Workout> FindByExternalUserId(UUID externalUserId);
 }
