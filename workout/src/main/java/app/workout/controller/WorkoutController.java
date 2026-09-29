@@ -1,11 +1,11 @@
 package app.workout.controller;
 
+import app.workout.dtos.WorkoutCreateDto;
 import app.workout.dtos.WorkoutResponseDto;
 import app.workout.service.WorkoutService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +21,11 @@ public class WorkoutController {
     @GetMapping
     public ResponseEntity<List<WorkoutResponseDto>> getAllWorkout(){
         return ResponseEntity.ok(workoutService.getAllWorkouts());
+    }
+
+    @PostMapping
+    public ResponseEntity<WorkoutResponseDto> createWorkout(@RequestBody WorkoutCreateDto workoutCreateDto){
+        WorkoutResponseDto createdWorkout = workoutService.createWorkout(workoutCreateDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
     }
 }

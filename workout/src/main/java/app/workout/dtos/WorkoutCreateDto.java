@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 
 public record WorkoutCreateDto(
         String workoutName,
-        WorkoutType workoutType,
-        LocalDateTime workoutDateTime
+        WorkoutType workoutType
 ) {
 }
