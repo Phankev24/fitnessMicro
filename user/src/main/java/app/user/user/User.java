@@ -38,7 +38,7 @@ public class User {
     }
 
     @PrePersist
-    public void genereateUuid(){
+    public void generateUuid(){
         if (this.externalUserId == null){
             this.externalUserId = UUID.randomUUID();
         }
