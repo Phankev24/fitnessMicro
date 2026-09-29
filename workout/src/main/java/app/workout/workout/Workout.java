@@ -37,5 +37,8 @@ public class Workout {
         if(this.externalWorkoutId == null){
             this.externalWorkoutId = UUID.randomUUID();
         }
+        if(this.workoutDateTime == null){
+            this.workoutDateTime = LocalDateTime.now();
+        }
     }
 }
