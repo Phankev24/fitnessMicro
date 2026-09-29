@@ -14,6 +14,7 @@ public class DataInitializer {
         return args ->{
             Workout workout1 = new Workout();
             workout1.setExternalWorkoutId(UUID.randomUUID());
+            workout1.setUserId(UUID.randomUUID());
             workout1.setWorkoutName("Chest Day");
             workout1.setWorkoutType(WorkoutType.STRENGTH);
             workout1.setWorkoutDateTime(LocalDateTime.now());

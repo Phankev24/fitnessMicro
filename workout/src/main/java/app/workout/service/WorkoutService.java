@@ -10,6 +10,7 @@ import org.hibernate.jdbc.Work;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class WorkoutService {
@@ -25,6 +26,13 @@ public class WorkoutService {
 
     public List<WorkoutResponseDto> getAllWorkouts(){
         return workoutRepository.findAll()
+                .stream()
+                .map(workoutResponseMapper::toDTO)
+                .toList();
+    }
+
+    public List<WorkoutResponseDto> getWorkoutByUserId(UUID userId){
+        return workoutRepository.findByUserId(userId)
                 .stream()
                 .map(workoutResponseMapper::toDTO)
                 .toList();

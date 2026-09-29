@@ -16,8 +16,12 @@ public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long internalWorkoutId;
+
     @Column(nullable = false, unique = true, updatable = false)
     private UUID externalWorkoutId;
+
+    @Column(nullable = false)
+    private UUID userId;
 
     private String workoutName;
     private LocalDateTime workoutDateTime;

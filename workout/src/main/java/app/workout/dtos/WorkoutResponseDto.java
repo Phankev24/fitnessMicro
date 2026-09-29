@@ -8,6 +8,7 @@ import java.util.UUID;
 public record WorkoutResponseDto(
         Long internalWorkoutId,
         UUID externalWorkoutId,
+        UUID userId,
         String workoutName,
         LocalDateTime workoutDateTime,
         WorkoutType workoutType

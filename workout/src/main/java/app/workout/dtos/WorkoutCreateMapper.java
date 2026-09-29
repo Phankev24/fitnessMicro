@@ -9,6 +9,7 @@ public class WorkoutCreateMapper{
         if(workout == null) return null;
 
         return new WorkoutCreateDto(
+                workout.getUserId(),
                 workout.getWorkoutName(),
                 workout.getWorkoutType()
         );
@@ -18,6 +19,7 @@ public class WorkoutCreateMapper{
         if(workoutCreateDto == null) return null;
 
         Workout workout = new Workout();
+        workout.setUserId(workoutCreateDto.userId());
         workout.setWorkoutName(workoutCreateDto.workoutName());
         workout.setWorkoutType(workoutCreateDto.workoutType());
 

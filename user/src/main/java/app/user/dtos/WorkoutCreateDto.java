@@ -1,8 +1,7 @@
-package app.workout.dtos;
+package app.user.dtos;
 
-import app.workout.workout.WorkoutType;
+import app.user.enums.WorkoutType;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record WorkoutCreateDto(
