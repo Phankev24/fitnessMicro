@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/workout")
@@ -21,6 +22,11 @@ public class WorkoutController {
     @GetMapping
     public ResponseEntity<List<WorkoutResponseDto>> getAllWorkout(){
         return ResponseEntity.ok(workoutService.getAllWorkouts());
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<WorkoutResponseDto>> getWorkoutsByUserId(@PathVariable UUID userId){
+        return ResponseEntity.ok(workoutService.getWorkoutByUserId(userId));
     }
 
     @PostMapping

@@ -12,6 +12,7 @@ public class WorkoutResponseMapper {
         return new WorkoutResponseDto(
                 workout.getInternalWorkoutId(),
                 workout.getExternalWorkoutId(),
+                workout.getUserId(),
                 workout.getWorkoutName(),
                 workout.getWorkoutDateTime(),
                 workout.getWorkoutType()
