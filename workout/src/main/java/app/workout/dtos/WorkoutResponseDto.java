@@ -10,6 +10,7 @@ public record WorkoutResponseDto(
         UUID externalWorkoutId,
         UUID userId,
         String workoutName,
+        String workoutDescription,
         LocalDateTime workoutDateTime,
         WorkoutType workoutType
 ){}

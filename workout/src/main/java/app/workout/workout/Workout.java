@@ -24,14 +24,16 @@ public class Workout {
     private UUID userId;
 
     private String workoutName;
+    private String workoutDescription;
     private LocalDateTime workoutDateTime;
 
     @Enumerated(EnumType.STRING)
     private WorkoutType workoutType;
 
-    public Workout(WorkoutType workoutType, LocalDateTime workoutDateTime, String workoutName, UUID externalWorkoutId) {
+    public Workout(WorkoutType workoutType, LocalDateTime workoutDateTime, String workoutDescription, String workoutName, UUID externalWorkoutId) {
         this.workoutType = workoutType;
         this.workoutDateTime = workoutDateTime;
+        this.workoutDescription = workoutDescription;
         this.workoutName = workoutName;
         this.externalWorkoutId = externalWorkoutId;
     }

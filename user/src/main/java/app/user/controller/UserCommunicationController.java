@@ -39,6 +39,7 @@ public class UserCommunicationController {
         WorkoutCreateDto workoutCreateDto = new WorkoutCreateDto(
                 userId,
                 userWorkoutRequestDto.workoutName(),
+                userWorkoutRequestDto.workoutDescription(),
                 userWorkoutRequestDto.workoutType()
         );
 
