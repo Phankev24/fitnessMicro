@@ -11,6 +11,7 @@ public class WorkoutCreateMapper{
         return new WorkoutCreateDto(
                 workout.getUserId(),
                 workout.getWorkoutName(),
+                workout.getWorkoutDescription(),
                 workout.getWorkoutType()
         );
     }
@@ -21,6 +22,7 @@ public class WorkoutCreateMapper{
         Workout workout = new Workout();
         workout.setUserId(workoutCreateDto.userId());
         workout.setWorkoutName(workoutCreateDto.workoutName());
+        workout.setWorkoutDescription(workoutCreateDto.workoutDescription());
         workout.setWorkoutType(workoutCreateDto.workoutType());
 
         return workout;

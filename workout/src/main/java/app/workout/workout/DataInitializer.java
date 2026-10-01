@@ -16,6 +16,7 @@ public class DataInitializer {
             workout1.setExternalWorkoutId(UUID.randomUUID());
             workout1.setUserId(UUID.randomUUID());
             workout1.setWorkoutName("Chest Day");
+            workout1.setWorkoutDescription("Working on upper body today - specifically chest.");
             workout1.setWorkoutType(WorkoutType.STRENGTH);
             workout1.setWorkoutDateTime(LocalDateTime.now());
 

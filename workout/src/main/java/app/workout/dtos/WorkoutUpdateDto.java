@@ -3,12 +3,11 @@ package app.workout.dtos;
 import app.workout.workout.WorkoutType;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-public record WorkoutCreateDto(
-        UUID userId,
+public record WorkoutUpdateDto(
         String workoutName,
         String workoutDescription,
-        WorkoutType workoutType
+        WorkoutType workoutType,
+        LocalDateTime workoutDateTime
 ) {
 }

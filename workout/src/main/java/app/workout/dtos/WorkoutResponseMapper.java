@@ -14,6 +14,7 @@ public class WorkoutResponseMapper {
                 workout.getExternalWorkoutId(),
                 workout.getUserId(),
                 workout.getWorkoutName(),
+                workout.getWorkoutDescription(),
                 workout.getWorkoutDateTime(),
                 workout.getWorkoutType()
         );
