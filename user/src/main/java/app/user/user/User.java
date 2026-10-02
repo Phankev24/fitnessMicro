@@ -16,6 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long internalUserId;
+
     @Column(nullable = false, unique = true, updatable = false)
     private UUID externalUserId;
 
