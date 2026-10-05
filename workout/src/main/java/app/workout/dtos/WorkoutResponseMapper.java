@@ -1,6 +1,6 @@
 package app.workout.dtos;
 
-import app.workout.workout.Workout;
+import app.workout.entities.Workout;
 import org.springframework.stereotype.Component;
 
 

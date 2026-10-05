@@ -1,6 +1,6 @@
 package app.workout.dtos;
 
-import app.workout.workout.WorkoutType;
+import app.workout.enums.WorkoutType;
 
 import java.time.LocalDateTime;
 

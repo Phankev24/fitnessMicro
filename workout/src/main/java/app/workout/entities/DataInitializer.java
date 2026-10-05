@@ -1,5 +1,7 @@
-package app.workout.workout;
+package app.workout.entities;
 
+import app.workout.enums.WorkoutType;
+import app.workout.repository.WorkoutRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

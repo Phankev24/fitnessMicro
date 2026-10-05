@@ -1,9 +1,8 @@
 package app.workout.service;
 
 import app.workout.dtos.*;
-import app.workout.workout.Workout;
-import app.workout.workout.WorkoutRepository;
-import org.hibernate.jdbc.Work;
+import app.workout.entities.Workout;
+import app.workout.repository.WorkoutRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -77,6 +76,4 @@ public class WorkoutService {
                 .map(workoutResponseMapper::toDTO)
                 .toList();
     }
-
-
 }
