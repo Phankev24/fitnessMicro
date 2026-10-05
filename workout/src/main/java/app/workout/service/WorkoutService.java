@@ -30,10 +30,10 @@ public class WorkoutService {
                 .toList();
     }
 
-    public WorkoutResponseDto getWorkoutById(Long id){
-        return workoutRepository.findById(id)
+    public WorkoutResponseDto getWorkoutById(Long workoutId){
+        return workoutRepository.findById(workoutId)
                 .map(workoutResponseMapper::toDTO)
-                .orElseThrow(() -> new RuntimeException("Workout not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Workout not found with workoutId: " + workoutId));
     }
 
     public WorkoutResponseDto createWorkout(WorkoutCreateDto workoutCreateDto){
@@ -65,8 +65,18 @@ public class WorkoutService {
         return workoutResponseMapper.toDTO(updatedWorkout);
     }
 
-    public void deleteWorkout(Long id){
-        Workout workout = workoutRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Workout not found: " + id));
+    public void deleteWorkout(Long workoutId){
+        Workout workout = workoutRepository.findById(workoutId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Workout not found: " + workoutId));
+        workoutRepository.delete(workout);
     }
+
+    public List<WorkoutResponseDto> getWorkoutByUserId(UUID userId){
+        return workoutRepository.findByUserId(userId)
+                .stream()
+                .map(workoutResponseMapper::toDTO)
+                .toList();
+    }
+
+
 }
