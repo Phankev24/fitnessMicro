@@ -1,0 +1,19 @@
+services:
+  db_user:
+    image: postgres:17.6-alpine3.22
+    container_name: user_db_container
+    environment:
+      POSTGRES_DB: user_db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+    ports:
+    - "5432:5432"
+    volumes:
+    - user_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d user_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  user_postgres_data:
