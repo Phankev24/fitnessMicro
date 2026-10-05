@@ -1,5 +1,6 @@
-package app.workout.workout;
+package app.workout.entities;
 
+import app.workout.enums.WorkoutType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

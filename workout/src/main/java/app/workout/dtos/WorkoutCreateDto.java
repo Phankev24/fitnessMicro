@@ -1,8 +1,8 @@
 package app.workout.dtos;
 
-import app.workout.workout.WorkoutType;
+import app.workout.enums.WorkoutType;
 
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public record WorkoutCreateDto(
@@ -10,5 +10,4 @@ public record WorkoutCreateDto(
         String workoutName,
         String workoutDescription,
         WorkoutType workoutType
-) {
-}
+) {}
