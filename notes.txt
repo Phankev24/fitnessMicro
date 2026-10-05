@@ -1,0 +1,25 @@
+Make your changes in IntelliJ
+git add .
+git commit -m "Describe your changes"
+git push
+
+Create PR
+gh pr create --base main --head features --title "Implement user deletion" --body "Adds user deletion functionality."
+
+Merge PR
+gh pr merge features
+
+If asked to delete branch → N
+Update local main
+git switch main
+git pull --ff-only
+
+Go back to development
+git switch features
+
+
+Runs with PostgreSQL
+mvn spring-boot:run "-Dspring-boot.run.profiles=prod"
+
+Runs with H2
+mvn spring-boot:run "-Dspring-boot.run.profiles=test"
