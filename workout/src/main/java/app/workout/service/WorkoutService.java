@@ -15,11 +15,13 @@ public class WorkoutService {
     private final WorkoutRepository workoutRepository;
     private final WorkoutResponseMapper workoutResponseMapper;
     private final WorkoutCreateMapper workoutCreateMapper;
+    private final WorkoutUpdateMapper workoutUpdateMapper;
 
-    public WorkoutService(WorkoutRepository workoutRepository, WorkoutResponseMapper workoutResponseMapper, WorkoutCreateMapper workoutCreateMapper){
+    public WorkoutService(WorkoutRepository workoutRepository, WorkoutResponseMapper workoutResponseMapper, WorkoutCreateMapper workoutCreateMapper, WorkoutUpdateMapper workoutUpdateMapper){
         this.workoutRepository = workoutRepository;
         this.workoutResponseMapper = workoutResponseMapper;
         this.workoutCreateMapper = workoutCreateMapper;
+        this.workoutUpdateMapper = workoutUpdateMapper;
     }
 
     public List<WorkoutResponseDto> getAllWorkouts(){
@@ -44,22 +46,7 @@ public class WorkoutService {
     public WorkoutResponseDto updateWorkout(Long id, WorkoutUpdateDto workoutUpdateDto) {
         Workout workout = workoutRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Workout not found with this id: " + id));
-        if (workoutUpdateDto.workoutName() != null) {
-            workout.setWorkoutName(workoutUpdateDto.workoutName());
-        }
-
-        if (workoutUpdateDto.workoutDescription() != null) {
-            workout.setWorkoutDescription(workoutUpdateDto.workoutDescription());
-        }
-
-        if (workoutUpdateDto.workoutType() != null) {
-            workout.setWorkoutType(workoutUpdateDto.workoutType());
-        }
-
-        if (workoutUpdateDto.workoutDateTime() != null) {
-            workout.setWorkoutDateTime(workoutUpdateDto.workoutDateTime());
-        }
-
+        workoutUpdateMapper.updateEntityFromDto(workoutUpdateDto, workout);
         Workout updatedWorkout = workoutRepository.save(workout);
         return workoutResponseMapper.toDTO(updatedWorkout);
     }

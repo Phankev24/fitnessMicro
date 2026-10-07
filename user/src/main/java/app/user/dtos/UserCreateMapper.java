@@ -6,19 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserCreateMapper {
 
-    public UserCreateDto toDTO(User user){
-        if(user == null) return null;
-
-        return new UserCreateDto(
-                user.getUserName(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getPhoneNumber()
-        );
-    }
-
     public User toEntity(UserCreateDto userCreateDto){
         if (userCreateDto == null) return null;
 
