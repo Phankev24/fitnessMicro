@@ -26,5 +26,13 @@ spring:
         exposure:
           include: health,info,prometheus
 
+  config:
+    import: "optional:consul:"
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+
 server:
   port: 8080
