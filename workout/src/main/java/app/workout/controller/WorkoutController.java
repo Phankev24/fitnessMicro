@@ -1,8 +1,8 @@
 package app.workout.controller;
 
-import app.workout.dtos.WorkoutCreateDto;
-import app.workout.dtos.WorkoutResponseDto;
-import app.workout.dtos.WorkoutUpdateDto;
+import app.workout.dtos.workout.WorkoutCreateDto;
+import app.workout.dtos.workout.WorkoutResponseDto;
+import app.workout.dtos.workout.WorkoutUpdateDto;
 import app.workout.service.WorkoutService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,7 @@
-package app.workout.dtos;
+package app.workout.dtos.workout;
 
 import app.workout.enums.WorkoutType;
 
-import java.util.List;
 import java.util.UUID;
 
 public record WorkoutCreateDto(

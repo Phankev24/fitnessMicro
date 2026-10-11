@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Profile;
 import java.util.UUID;
 
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class DataInitializer {
 
     @Bean

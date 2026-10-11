@@ -1,8 +1,9 @@
 package app.user.dtos;
 
 public record UserUpdateDto(
+        String userName,
         String firstName,
         String lastName,
-        String email,
-        String phoneNumber
+        String phoneNumber,
+        String email
 ) {}
