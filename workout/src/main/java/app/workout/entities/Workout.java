@@ -33,8 +33,9 @@ public class Workout {
     @Enumerated(EnumType.STRING)
     private WorkoutType workoutType;
 
+    //One workout contains many workoutExercises. eg workout Sessions
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkoutExercise> workoutExercises = new ArrayList<>();
+    private List<WorkoutExercise> workoutSession = new ArrayList<>();
 
     public Workout(WorkoutType workoutType, LocalDateTime workoutDateTime, String workoutDescription, String workoutName, UUID externalWorkoutId) {
         this.workoutType = workoutType;

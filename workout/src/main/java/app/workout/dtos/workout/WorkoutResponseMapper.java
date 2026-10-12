@@ -13,17 +13,15 @@ public class WorkoutResponseMapper {
     public WorkoutResponseDto toDTO(Workout workout){
         if(workout == null) return null;
 
-        List<WorkoutExerciseResponseDto> exerciseDtos = workout.getWorkoutExercises()
+        List<WorkoutExerciseResponseDto> exerciseDtos = workout.getWorkoutSession()
                 .stream()
-                .map(we -> new WorkoutExerciseResponseDto(
-                        we.getWorkoutExerciseId(),
-                        we.getExerciseName(),
-                        we.getExercises()
+                .map(ws -> new WorkoutExerciseResponseDto(
+                        ws.getExerciseName(),
+                        ws.getSets()
                                 .stream()
-                                .map(e -> new ExerciseResponseDto(
-                                        e.getExerciseId(),
-                                        e.getReps(),
-                                        e.getWeight()
+                                .map(s -> new ExerciseResponseDto(
+                                        s.getReps(),
+                                        s.getWeight()
                                 ))
                                 .toList()
                 ))

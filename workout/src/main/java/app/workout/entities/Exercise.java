@@ -17,6 +17,7 @@ public class Exercise {
     private Integer reps;
     private Double weight;
 
+    //many workoutExercises can map to one exercise
     @ManyToOne
     private WorkoutExercise workoutExercise;
 

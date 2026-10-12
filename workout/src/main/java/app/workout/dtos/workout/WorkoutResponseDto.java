@@ -15,5 +15,5 @@ public record WorkoutResponseDto(
         String workoutDescription,
         LocalDateTime workoutDateTime,
         WorkoutType workoutType,
-        List<WorkoutExerciseResponseDto> workoutExercises
+        List<WorkoutExerciseResponseDto> workoutSession
 ){}
