@@ -24,7 +24,7 @@ public class UserCommunicationController {
         this.userClient = userClient;
     }
 
-    @GetMapping
+    @GetMapping("/workout")
     public ResponseEntity<List<WorkoutResponseDto>> getAllWorkouts(){
         return ResponseEntity.ok(userClient.getWorkouts());
     }

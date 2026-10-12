@@ -1,8 +1,10 @@
-package app.workout.dtos;
+package app.workout.dtos.workout;
 
-import app.workout.workout.WorkoutType;
+import app.workout.dtos.workoutExercise.WorkoutExerciseResponseDto;
+import app.workout.enums.WorkoutType;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public record WorkoutResponseDto(
@@ -12,5 +14,6 @@ public record WorkoutResponseDto(
         String workoutName,
         String workoutDescription,
         LocalDateTime workoutDateTime,
-        WorkoutType workoutType
+        WorkoutType workoutType,
+        List<WorkoutExerciseResponseDto> workoutExercises
 ){}

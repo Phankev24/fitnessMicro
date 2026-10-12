@@ -1,8 +1,8 @@
 package app.workout.controller;
 
-import app.workout.dtos.WorkoutCreateDto;
-import app.workout.dtos.WorkoutResponseDto;
-import app.workout.dtos.WorkoutUpdateDto;
+import app.workout.dtos.workout.WorkoutCreateDto;
+import app.workout.dtos.workout.WorkoutResponseDto;
+import app.workout.dtos.workout.WorkoutUpdateDto;
 import app.workout.service.WorkoutService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +25,9 @@ public class WorkoutController {
         return ResponseEntity.ok(workoutService.getAllWorkouts());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<WorkoutResponseDto> getWorkoutById(@PathVariable Long id){
-        return ResponseEntity.ok(workoutService.getWorkoutById(id));
+    @GetMapping("/{workoutId}")
+    public ResponseEntity<WorkoutResponseDto> getWorkoutById(@PathVariable Long workoutId){
+        return ResponseEntity.ok(workoutService.getWorkoutById(workoutId));
     }
 
     @PostMapping
@@ -36,16 +36,20 @@ public class WorkoutController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<WorkoutResponseDto> updateWorkout(@PathVariable Long id, @RequestBody WorkoutUpdateDto workoutUpdateDto){
-        WorkoutResponseDto updatedWorkout = workoutService.updateWorkout(id, workoutUpdateDto);
-
+    @PatchMapping("/{workoutId}")
+    public ResponseEntity<WorkoutResponseDto> updateWorkout(@PathVariable Long workoutId, @RequestBody WorkoutUpdateDto workoutUpdateDto){
+        WorkoutResponseDto updatedWorkout = workoutService.updateWorkout(workoutId, workoutUpdateDto);
         return ResponseEntity.ok(updatedWorkout);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteWorkout(@PathVariable Long id){
-        workoutService.deleteWorkout(id);
+    @DeleteMapping("/{workoutId}")
+    public ResponseEntity<String> deleteWorkout(@PathVariable Long workoutId){
+        workoutService.deleteWorkout(workoutId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<WorkoutResponseDto>> getWorkoutsByUserId(@PathVariable UUID userId){
+        return ResponseEntity.ok(workoutService.getWorkoutByUserId(userId));
     }
 }

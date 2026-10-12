@@ -1,4 +1,4 @@
-package app.workout.workout;
+package app.workout.enums;
 
 public enum WorkoutType {
     CARDIO,
