@@ -1,5 +1,6 @@
 package app.workout.dtos.workout;
 
+import app.workout.dtos.exercise.ExerciseResponseDto;
 import app.workout.dtos.workoutExercise.WorkoutExerciseResponseDto;
 import app.workout.entities.Workout;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,15 @@ public class WorkoutResponseMapper {
                 .stream()
                 .map(we -> new WorkoutExerciseResponseDto(
                         we.getWorkoutExerciseId(),
-                        we.getExerciseName()
+                        we.getExerciseName(),
+                        we.getExercises()
+                                .stream()
+                                .map(e -> new ExerciseResponseDto(
+                                        e.getExerciseId(),
+                                        e.getReps(),
+                                        e.getWeight()
+                                ))
+                                .toList()
                 ))
                 .toList();
 

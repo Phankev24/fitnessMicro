@@ -1,4 +1,9 @@
 package app.workout.dtos.exercise;
 
-public class ExerciseResponseDto {
+public record ExerciseResponseDto(
+        Long exerciseId,
+        Integer reps,
+        Double weight
+
+) {
 }
