@@ -29,6 +29,19 @@ public class DataInitializer {
             workoutExercise1.setWorkout(workout1);
             workout1.getWorkoutExercises().add(workoutExercise1);
 
+            Exercise set1 = new Exercise(80.0, 10);
+            set1.setWorkoutExercise(workoutExercise1);
+            workoutExercise1.getExercises().add(set1);
+
+            Exercise set2 = new Exercise(80.0, 10);
+            set2.setWorkoutExercise(workoutExercise1);
+            workoutExercise1.getExercises().add(set2);
+
+            Exercise set3 = new Exercise(80.0, 10);
+            set3.setWorkoutExercise(workoutExercise1);
+            workoutExercise1.getExercises().add(set3);
+
+
 
 
             Workout workout2 = new Workout();
