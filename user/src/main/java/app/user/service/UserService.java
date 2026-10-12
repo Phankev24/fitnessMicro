@@ -1,6 +1,6 @@
 package app.user.service;
 
-import app.user.dtos.*;
+import app.user.dtos.user.*;
 import app.user.user.User;
 import app.user.user.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -34,6 +35,15 @@ public class UserService {
         return userRepository.findById(id)
                 .map(userResponseMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    }
+
+    public UserResponseDto getUserByExternalId(UUID externalUserId){
+        return userRepository.findByExternalUserId(externalUserId)
+                .map(userResponseMapper::toDTO)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "User not found with external id: " + externalUserId
+                ));
     }
 
     public UserResponseDto createUser(UserCreateDto userCreateDto){

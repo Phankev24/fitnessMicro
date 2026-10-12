@@ -1,4 +1,4 @@
-package app.user.dtos;
+package app.user.dtos.user;
 
 import app.user.user.User;
 import org.springframework.stereotype.Component;

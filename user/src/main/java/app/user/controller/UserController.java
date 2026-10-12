@@ -1,8 +1,8 @@
 package app.user.controller;
 
-import app.user.dtos.UserCreateDto;
-import app.user.dtos.UserResponseDto;
-import app.user.dtos.UserUpdateDto;
+import app.user.dtos.user.UserCreateDto;
+import app.user.dtos.user.UserResponseDto;
+import app.user.dtos.user.UserUpdateDto;
 import app.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

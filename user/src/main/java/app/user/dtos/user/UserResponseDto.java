@@ -1,11 +1,15 @@
-package app.user.dtos;
+package app.user.dtos.user;
 
-public record UserCreateDto(
+import java.util.UUID;
+
+
+public record UserResponseDto(
+        Long internalUserId,
+        UUID externalUserId,
         String userName,
         String firstName,
         String lastName,
         String email,
         String password,
         String phoneNumber
-) {
-}
+){}

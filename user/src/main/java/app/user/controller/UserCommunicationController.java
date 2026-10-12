@@ -1,9 +1,12 @@
 package app.user.controller;
 
 import app.user.client.UserClient;
-import app.user.dtos.UserWorkoutRequestDto;
-import app.user.dtos.WorkoutCreateDto;
-import app.user.dtos.WorkoutResponseDto;
+import app.user.client.WorkoutClient;
+import app.user.dtos.user.UserResponseDto;
+import app.user.dtos.user.UserWorkoutRequestDto;
+import app.user.dtos.workout.UserWorkoutResponseDto;
+import app.user.dtos.workout.WorkoutCreateDto;
+import app.user.dtos.workout.WorkoutResponseDto;
 import app.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +21,20 @@ public class UserCommunicationController {
 
     private final UserService userService;
     private final UserClient userClient;
+    private final WorkoutClient workoutClient;
 
-    public UserCommunicationController(UserService userService, UserClient userClient){
+    public UserCommunicationController(UserService userService, UserClient userClient, WorkoutClient workoutClient){
         this.userService = userService;
         this.userClient = userClient;
+        this.workoutClient = workoutClient;
+    }
+
+    @GetMapping("/{userId}/profile")
+    public ResponseEntity<UserWorkoutResponseDto> getUserWithWorkouts(@PathVariable UUID userId){
+        UserResponseDto userDto = userService.getUserByExternalId(userId);
+        List<WorkoutResponseDto> workouts = workoutClient.getWorkoutsByUserId(userId);
+
+        return ResponseEntity.ok(new UserWorkoutResponseDto(userDto, workouts));
     }
 
     @GetMapping("/workout")

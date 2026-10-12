@@ -16,34 +16,49 @@ public class DataInitializer {
     @Bean
     CommandLineRunner initDatabase(WorkoutRepository workoutRepository){
         return args ->{
+// --- Workout 1: Upper Day ---
             Workout workout1 = new Workout();
             workout1.setExternalWorkoutId(UUID.randomUUID());
             workout1.setUserId(UUID.randomUUID());
-            workout1.setWorkoutName("Chest Day");
-            workout1.setWorkoutDescription("Working on upper body today - specifically chest.");
+            workout1.setWorkoutName("Upper Day");
+            workout1.setWorkoutDescription("Working on upper body today - specifically chest and back.");
             workout1.setWorkoutType(WorkoutType.STRENGTH);
             workout1.setWorkoutDateTime(LocalDateTime.now());
 
+            // Exercise 1: Bench Press
             WorkoutExercise workoutExercise1 = new WorkoutExercise();
             workoutExercise1.setExerciseName("Bench Press");
             workoutExercise1.setWorkout(workout1);
             workout1.getWorkoutSession().add(workoutExercise1);
 
-            Exercise set1 = new Exercise(80.0, 10);
+            Exercise set1 = new Exercise(70.0, 10);
             set1.setWorkoutExercise(workoutExercise1);
             workoutExercise1.getSets().add(set1);
 
-            Exercise set2 = new Exercise(80.0, 10);
+            Exercise set2 = new Exercise(75.0, 7);
             set2.setWorkoutExercise(workoutExercise1);
             workoutExercise1.getSets().add(set2);
 
-            Exercise set3 = new Exercise(80.0, 10);
+            Exercise set3 = new Exercise(75.0, 5);
             set3.setWorkoutExercise(workoutExercise1);
             workoutExercise1.getSets().add(set3);
 
+            // Exercise 2: Lat Pulldown
+            WorkoutExercise workoutExercise3 = new WorkoutExercise();
+            workoutExercise3.setExerciseName("Lat Pulldown");
+            workoutExercise3.setWorkout(workout1);
+            workout1.getWorkoutSession().add(workoutExercise3); // ✅ FIXED: Added Lat Pulldown to workout1
+
+            Exercise set4 = new Exercise(65.0, 12);
+            set4.setWorkoutExercise(workoutExercise3);
+            workoutExercise3.getSets().add(set4);
+
+            Exercise set5 = new Exercise(70.0, 10);
+            set5.setWorkoutExercise(workoutExercise3);
+            workoutExercise3.getSets().add(set5);
 
 
-
+            // --- Workout 2: Leg Day ---
             Workout workout2 = new Workout();
             workout2.setExternalWorkoutId(UUID.randomUUID());
             workout2.setUserId(UUID.randomUUID());
@@ -52,11 +67,14 @@ public class DataInitializer {
             workout2.setWorkoutType(WorkoutType.STRENGTH);
             workout2.setWorkoutDateTime(LocalDateTime.now());
 
-
             WorkoutExercise workoutExercise2 = new WorkoutExercise();
             workoutExercise2.setExerciseName("Leg Press");
             workoutExercise2.setWorkout(workout2);
             workout2.getWorkoutSession().add(workoutExercise2);
+
+            Exercise legSet1 = new Exercise(120.0, 12);
+            legSet1.setWorkoutExercise(workoutExercise2);
+            workoutExercise2.getSets().add(legSet1);
 
 
             workoutRepository.save(workout1);
