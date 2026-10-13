@@ -9,7 +9,7 @@ public record UserResponseDto(
         String userName,
         String firstName,
         String lastName,
+        String phoneNumber,
         String email,
-        String password,
-        String phoneNumber
+        String password
 ){}

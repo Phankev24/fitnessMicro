@@ -13,9 +13,9 @@ public class UserCreateMapper {
         user.setUserName(userCreateDto.userName());
         user.setFirstName(userCreateDto.firstName());
         user.setLastName(userCreateDto.lastName());
+        user.setPhoneNumber(userCreateDto.phoneNumber());
         user.setEmail(userCreateDto.email());
         user.setPassword(userCreateDto.password());
-        user.setPhoneNumber(userCreateDto.phoneNumber());
 
         return user;
     }

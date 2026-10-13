@@ -6,5 +6,4 @@ import java.util.List;
 public record UserWorkoutResponseDto(
         UserResponseDto user,
         List<WorkoutResponseDto> workouts
-) {
-}
+) {}

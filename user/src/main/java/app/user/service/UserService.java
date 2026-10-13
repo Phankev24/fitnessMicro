@@ -24,6 +24,7 @@ public class UserService {
         this.userUpdateMapper = userUpdateMapper;
     }
 
+
     public List<UserResponseDto> getAllUsers(){
         return userRepository.findAll()
                 .stream()
@@ -31,11 +32,13 @@ public class UserService {
                 .toList();
     }
 
+
     public UserResponseDto getUserById(Long id){
         return userRepository.findById(id)
                 .map(userResponseMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
+
 
     public UserResponseDto getUserByExternalId(UUID externalUserId){
         return userRepository.findByExternalUserId(externalUserId)
@@ -46,11 +49,13 @@ public class UserService {
                 ));
     }
 
+
     public UserResponseDto createUser(UserCreateDto userCreateDto){
         User userEntity = userCreateMapper.toEntity(userCreateDto);
         User savedUser = userRepository.save(userEntity);
         return userResponseMapper.toDTO(savedUser);
     }
+
 
     public UserResponseDto updateUser(Long id, UserUpdateDto userUpdateDto){
         User user = userRepository.findById(id)
@@ -59,6 +64,7 @@ public class UserService {
         User upatedUser = userRepository.save(user);
         return userResponseMapper.toDTO(upatedUser);
     }
+
 
     public void deleteUser(Long id){
         User user = userRepository.findById(id)

@@ -1,7 +1,6 @@
 package app.user.controller;
 
 import app.user.client.UserClient;
-import app.user.client.WorkoutClient;
 import app.user.dtos.user.UserResponseDto;
 import app.user.dtos.user.UserWorkoutRequestDto;
 import app.user.dtos.workout.UserWorkoutResponseDto;
@@ -12,8 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/client/user")
@@ -21,31 +23,40 @@ public class UserCommunicationController {
 
     private final UserService userService;
     private final UserClient userClient;
-    private final WorkoutClient workoutClient;
 
-    public UserCommunicationController(UserService userService, UserClient userClient, WorkoutClient workoutClient){
+    public UserCommunicationController(UserService userService, UserClient userClient){
         this.userService = userService;
         this.userClient = userClient;
-        this.workoutClient = workoutClient;
     }
 
-    @GetMapping("/{userId}/profile")
+    @GetMapping("/workout")
+    public ResponseEntity<List<UserWorkoutResponseDto>> getAllUsersWithWorkouts(){
+        List<UserResponseDto> allUsers = userService.getAllUsers();
+        List<WorkoutResponseDto> allWorkouts = userClient.getWorkouts();
+
+        Map<UUID, List<WorkoutResponseDto>> workoutByUserId = allWorkouts
+                .stream()
+                .collect(Collectors.groupingBy(WorkoutResponseDto::userId));
+
+        List<UserWorkoutResponseDto> result = allUsers
+                .stream()
+                .map(user -> new UserWorkoutResponseDto(
+                        user,
+                        workoutByUserId.getOrDefault(user.externalUserId(), Collections.emptyList())
+                ))
+                .toList();
+        return ResponseEntity.ok(result);
+    }
+
+
+    @GetMapping("/{userId}/userWorkout")
     public ResponseEntity<UserWorkoutResponseDto> getUserWithWorkouts(@PathVariable UUID userId){
         UserResponseDto userDto = userService.getUserByExternalId(userId);
-        List<WorkoutResponseDto> workouts = workoutClient.getWorkoutsByUserId(userId);
+        List<WorkoutResponseDto> workouts = userClient.getWorkoutsByUserId(userId);
 
         return ResponseEntity.ok(new UserWorkoutResponseDto(userDto, workouts));
     }
 
-    @GetMapping("/workout")
-    public ResponseEntity<List<WorkoutResponseDto>> getAllWorkouts(){
-        return ResponseEntity.ok(userClient.getWorkouts());
-    }
-
-    @GetMapping("/{userId}/workout")
-    public ResponseEntity<List<WorkoutResponseDto>> getWorkoutsByUserId(@PathVariable UUID userId){
-        return ResponseEntity.ok(userClient.getWorkoutsByUserId(userId));
-    }
 
     @PostMapping("/{userId}/workout")
     public ResponseEntity<WorkoutResponseDto> createWorkoutForUser(@PathVariable UUID userId,@RequestBody UserWorkoutRequestDto userWorkoutRequestDto) {
@@ -56,7 +67,7 @@ public class UserCommunicationController {
                 userWorkoutRequestDto.workoutType()
         );
 
-        WorkoutResponseDto createdWorkout = userClient.createWorkout(workoutCreateDto);
+        WorkoutResponseDto createdWorkout = userClient.userCreateWorkout(workoutCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
     }
 }
