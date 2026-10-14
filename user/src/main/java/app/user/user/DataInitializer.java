@@ -25,7 +25,7 @@ public class DataInitializer {
 
             User user2 = new User();
             user2.setExternalUserId(UUID.fromString("9abd6f56-9a62-4f25-96c8-afbdf742aa0c"));
-            user2.setUserName("jane_smith");
+            user2.setUserName("jane_smith22");
             user2.setFirstName("Jane");
             user2.setLastName("Smith");
             user2.setEmail("jane@example.com");
