@@ -1,4 +1,4 @@
-package app.user.dtos;
+package app.user.dtos.user;
 
 import app.user.user.User;
 import org.springframework.stereotype.Component;
@@ -14,9 +14,9 @@ public class UserResponseMapper {
                 user.getUserName(),
                 user.getFirstName(),
                 user.getLastName(),
+                user.getPhoneNumber(),
                 user.getEmail(),
-                user.getPassword(),
-                user.getPhoneNumber()
+                user.getPassword()
         );
     }
 }

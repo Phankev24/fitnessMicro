@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -30,6 +32,10 @@ public class Workout {
 
     @Enumerated(EnumType.STRING)
     private WorkoutType workoutType;
+
+    //One workout contains many workoutExercises. eg workout Sessions
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WorkoutExercise> workoutSession = new ArrayList<>();
 
     public Workout(WorkoutType workoutType, LocalDateTime workoutDateTime, String workoutDescription, String workoutName, UUID externalWorkoutId) {
         this.workoutType = workoutType;

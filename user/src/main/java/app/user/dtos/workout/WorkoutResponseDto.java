@@ -1,4 +1,4 @@
-package app.user.dtos;
+package app.user.dtos.workout;
 
 import app.user.enums.WorkoutType;
 

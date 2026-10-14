@@ -1,6 +1,6 @@
 package app.workout.service;
 
-import app.workout.dtos.*;
+import app.workout.dtos.workout.*;
 import app.workout.entities.Workout;
 import app.workout.repository.WorkoutRepository;
 import org.springframework.http.HttpStatus;

@@ -1,11 +1,8 @@
-package app.user.dtos;
+package app.user.dtos.user;
 
 import app.user.enums.WorkoutType;
 
-import java.util.UUID;
-
-public record WorkoutCreateDto(
-        UUID userId,
+public record UserWorkoutRequestDto(
         String workoutName,
         String workoutDescription,
         WorkoutType workoutType

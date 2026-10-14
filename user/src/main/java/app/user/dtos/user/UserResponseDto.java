@@ -1,4 +1,4 @@
-package app.user.dtos;
+package app.user.dtos.user;
 
 import java.util.UUID;
 
@@ -9,7 +9,7 @@ public record UserResponseDto(
         String userName,
         String firstName,
         String lastName,
+        String phoneNumber,
         String email,
-        String password,
-        String phoneNumber
+        String password
 ){}

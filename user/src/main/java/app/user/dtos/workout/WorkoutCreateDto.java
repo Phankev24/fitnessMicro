@@ -1,8 +1,7 @@
-package app.workout.dtos;
+package app.user.dtos.workout;
 
-import app.workout.enums.WorkoutType;
+import app.user.enums.WorkoutType;
 
-import java.util.List;
 import java.util.UUID;
 
 public record WorkoutCreateDto(
@@ -10,4 +9,5 @@ public record WorkoutCreateDto(
         String workoutName,
         String workoutDescription,
         WorkoutType workoutType
-) {}
+) {
+}
