@@ -36,13 +36,15 @@ public class UserCommunicationController {
 
         Map<UUID, List<WorkoutResponseDto>> workoutByUserId = allWorkouts
                 .stream()
-                .collect(Collectors.groupingBy(WorkoutResponseDto::userId));
+                .collect(Collectors.groupingBy(WorkoutResponseDto::userId
+                ));
 
         List<UserWorkoutResponseDto> result = allUsers
                 .stream()
                 .map(user -> new UserWorkoutResponseDto(
                         user,
                         workoutByUserId.getOrDefault(user.externalUserId(), Collections.emptyList())
+
                 ))
                 .toList();
         return ResponseEntity.ok(result);
