@@ -10,7 +10,6 @@ public class WorkoutCreateMapper{
         if(workoutCreateDto == null) return null;
 
         Workout workout = new Workout();
-        workout.setUserId(workoutCreateDto.userId());
         workout.setWorkoutName(workoutCreateDto.workoutName());
         workout.setWorkoutDescription(workoutCreateDto.workoutDescription());
         workout.setWorkoutType(workoutCreateDto.workoutType());

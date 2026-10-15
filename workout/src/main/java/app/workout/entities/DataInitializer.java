@@ -19,7 +19,7 @@ public class DataInitializer {
             // --- Workout 1: Upper Day ---
             Workout workout1 = new Workout();
             workout1.setExternalWorkoutId(UUID.randomUUID());
-            workout1.setUserId(UUID.randomUUID());
+            workout1.setUserId(UUID.fromString("a963d9c1-4094-420b-8c40-1b16d3131d2c"));
             workout1.setWorkoutName("Upper Day");
             workout1.setWorkoutDescription("Working on upper body today - specifically chest and back.");
             workout1.setWorkoutType(WorkoutType.STRENGTH);
@@ -44,7 +44,7 @@ public class DataInitializer {
             // --- Workout 2: Leg Day ---
             Workout workout2 = new Workout();
             workout2.setExternalWorkoutId(UUID.randomUUID());
-            workout2.setUserId(UUID.randomUUID());
+            workout2.setUserId(UUID.fromString("9abd6f56-9a62-4f25-96c8-afbdf742aa0c"));
             workout2.setWorkoutName("Leg Day");
             workout2.setWorkoutDescription("Working out the legs - focus on the quads.");
             workout2.setWorkoutType(WorkoutType.STRENGTH);

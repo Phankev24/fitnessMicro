@@ -2,7 +2,6 @@ package app.user.controller;
 
 import app.user.client.UserClient;
 import app.user.dtos.user.UserResponseDto;
-import app.user.dtos.user.UserWorkoutRequestDto;
 import app.user.dtos.workout.UserWorkoutResponseDto;
 import app.user.dtos.workout.WorkoutCreateDto;
 import app.user.dtos.workout.WorkoutResponseDto;
@@ -61,15 +60,8 @@ public class UserCommunicationController {
 
 
     @PostMapping("/{userId}/workout")
-    public ResponseEntity<WorkoutResponseDto> createWorkoutForUser(@PathVariable UUID userId,@RequestBody UserWorkoutRequestDto userWorkoutRequestDto) {
-        WorkoutCreateDto workoutCreateDto = new WorkoutCreateDto(
-                userId,
-                userWorkoutRequestDto.workoutName(),
-                userWorkoutRequestDto.workoutDescription(),
-                userWorkoutRequestDto.workoutType()
-        );
-
-        WorkoutResponseDto createdWorkout = userClient.userCreateWorkout(workoutCreateDto);
+    public ResponseEntity<WorkoutResponseDto> createWorkoutForUser(@PathVariable UUID userId,@RequestBody WorkoutCreateDto workoutCreateDto) {
+        WorkoutResponseDto createdWorkout = userClient.userCreateWorkout(userId, workoutCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
     }
 }

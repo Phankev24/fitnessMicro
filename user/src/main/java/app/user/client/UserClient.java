@@ -43,10 +43,10 @@ public class UserClient {
         return response.getBody();
     }
 
-    public WorkoutResponseDto userCreateWorkout(WorkoutCreateDto workoutCreateDto){
+    public WorkoutResponseDto userCreateWorkout(UUID userId, WorkoutCreateDto workoutCreateDto){
         HttpEntity<WorkoutCreateDto> request = new HttpEntity<>(workoutCreateDto);
         ResponseEntity<WorkoutResponseDto> response = restTemplate.postForEntity(
-                workoutServiceUrl,
+                workoutServiceUrl + "/user/" + userId,
                 request,
                 WorkoutResponseDto.class
         );

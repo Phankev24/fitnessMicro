@@ -20,6 +20,10 @@ public class WorkoutExerciseResponseMapper {
                 ))
                 .toList();
 
+//        Long internalWorkoutId = workoutExercise.getWorkout() != null
+//                ? workoutExercise.getWorkout().getInternalWorkoutId()
+//                : null;
+
         return new WorkoutExerciseResponseDto(
                 workoutExercise.getWorkoutExerciseId(),
                 workoutExercise.getExerciseName(),
