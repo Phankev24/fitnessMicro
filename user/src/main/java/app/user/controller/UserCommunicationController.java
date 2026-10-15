@@ -2,10 +2,9 @@ package app.user.controller;
 
 import app.user.client.UserClient;
 import app.user.dtos.user.UserResponseDto;
-import app.user.dtos.workout.UserWorkoutResponseDto;
-import app.user.dtos.workout.WorkoutCreateDto;
-import app.user.dtos.workout.WorkoutResponseDto;
+import app.user.dtos.workout.*;
 import app.user.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +27,7 @@ public class UserCommunicationController {
         this.userClient = userClient;
     }
 
+    @Operation(description = "GET all users and their workout history")
     @GetMapping("/workout")
     public ResponseEntity<List<UserWorkoutResponseDto>> getAllUsersWithWorkouts(){
         List<UserResponseDto> allUsers = userService.getAllUsers();
@@ -49,7 +49,7 @@ public class UserCommunicationController {
         return ResponseEntity.ok(result);
     }
 
-
+    @Operation(description = "GET one user and their Workout history")
     @GetMapping("/{userId}/userWorkout")
     public ResponseEntity<UserWorkoutResponseDto> getUserWithWorkouts(@PathVariable UUID userId){
         UserResponseDto userDto = userService.getUserByExternalId(userId);
@@ -58,10 +58,26 @@ public class UserCommunicationController {
         return ResponseEntity.ok(new UserWorkoutResponseDto(userDto, workouts));
     }
 
-
+    @Operation(description = "POST a workout for a User. Links with the users UUID")
     @PostMapping("/{userId}/workout")
     public ResponseEntity<WorkoutResponseDto> createWorkoutForUser(@PathVariable UUID userId,@RequestBody WorkoutCreateDto workoutCreateDto) {
         WorkoutResponseDto createdWorkout = userClient.userCreateWorkout(userId, workoutCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
+    }
+
+
+    @Operation(description = "POST workoutExercise (log) for user")
+    @PostMapping("/workoutExercise")
+    public ResponseEntity<WorkoutExerciseResponseDto> createWorkoutExerciseForUser(@RequestBody WorkoutExerciseCreateDto workoutExerciseCreateDto){
+        WorkoutExerciseResponseDto createdWorkoutExercise = userClient.userCreateWorkoutExercise(workoutExerciseCreateDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkoutExercise);
+    }
+
+
+    @Operation(description = "POST a exercise (set) for User, links with workoutExerciseId Currently. later on pathVariable")
+    @PostMapping("/exercise")
+    public ResponseEntity<ExerciseResponseDto> createExercise(@RequestBody ExerciseCreateDto exerciseCreateDto){
+        ExerciseResponseDto createdExercise = userClient.createExercise(exerciseCreateDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdExercise);
     }
 }

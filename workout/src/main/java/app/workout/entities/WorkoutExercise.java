@@ -16,7 +16,7 @@ public class WorkoutExercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long workoutExerciseId;
-
+    
     private String exerciseName;
 
     //Bidirectional many workouts map one workout Session
