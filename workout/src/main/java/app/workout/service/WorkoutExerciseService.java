@@ -4,12 +4,12 @@ import app.workout.dtos.workoutExercise.WorkoutExerciseCreateDto;
 import app.workout.dtos.workoutExercise.WorkoutExerciseCreateMapper;
 import app.workout.dtos.workoutExercise.WorkoutExerciseResponseDto;
 import app.workout.dtos.workoutExercise.WorkoutExerciseResponseMapper;
-import app.workout.entities.Workout;
 import app.workout.entities.WorkoutExercise;
 import app.workout.repository.WorkoutExerciseRepository;
-import app.workout.repository.WorkoutRepository;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,5 +37,11 @@ public class WorkoutExerciseService {
         WorkoutExercise workoutExerciseEntity = workoutExerciseCreateMapper.toEntity(externalWorkoutId ,workoutExerciseCreateDto);
         WorkoutExercise savedWorkoutExercise = workoutExerciseRepository.save(workoutExerciseEntity);
         return workoutExerciseResponseMapper.toDTO(savedWorkoutExercise);
+    }
+
+    public void deleteWorkoutExercise(Long internalWorkoutExerciseId){
+        WorkoutExercise workoutExercise = workoutExerciseRepository.findById(internalWorkoutExerciseId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        workoutExerciseRepository.delete(workoutExercise);
     }
 }
