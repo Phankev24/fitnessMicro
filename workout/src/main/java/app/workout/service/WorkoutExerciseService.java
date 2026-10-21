@@ -4,12 +4,15 @@ import app.workout.dtos.workoutExercise.WorkoutExerciseCreateDto;
 import app.workout.dtos.workoutExercise.WorkoutExerciseCreateMapper;
 import app.workout.dtos.workoutExercise.WorkoutExerciseResponseDto;
 import app.workout.dtos.workoutExercise.WorkoutExerciseResponseMapper;
+import app.workout.entities.Workout;
 import app.workout.entities.WorkoutExercise;
 import app.workout.repository.WorkoutExerciseRepository;
+import app.workout.repository.WorkoutRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class WorkoutExerciseService {
@@ -30,8 +33,8 @@ public class WorkoutExerciseService {
                 .toList();
     }
 
-    public WorkoutExerciseResponseDto createWorkoutSession(WorkoutExerciseCreateDto workoutExerciseCreateDto){
-        WorkoutExercise workoutExerciseEntity = workoutExerciseCreateMapper.toEntity(workoutExerciseCreateDto);
+    public WorkoutExerciseResponseDto createWorkoutSession(UUID externalWorkoutId, WorkoutExerciseCreateDto workoutExerciseCreateDto){
+        WorkoutExercise workoutExerciseEntity = workoutExerciseCreateMapper.toEntity(workoutExerciseCreateDto, externalWorkoutId);
         WorkoutExercise savedWorkoutExercise = workoutExerciseRepository.save(workoutExerciseEntity);
         return workoutExerciseResponseMapper.toDTO(savedWorkoutExercise);
     }

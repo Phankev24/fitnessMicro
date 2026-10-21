@@ -16,6 +16,7 @@ public class WorkoutResponseMapper {
                 .stream()
                 .map(ws -> new WorkoutExerciseResponseDto(
                         ws.getWorkoutExerciseId(),
+                        ws.getWorkout().getExternalWorkoutId(), 
                         ws.getExerciseName(),
                         ws.getSets()
                                 .stream()

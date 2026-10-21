@@ -67,9 +67,9 @@ public class UserCommunicationController {
 
 
     @Operation(description = "POST workoutExercise (log) for user")
-    @PostMapping("/workoutExercise")
-    public ResponseEntity<WorkoutExerciseResponseDto> createWorkoutExerciseForUser(@RequestBody WorkoutExerciseCreateDto workoutExerciseCreateDto){
-        WorkoutExerciseResponseDto createdWorkoutExercise = userClient.userCreateWorkoutExercise(workoutExerciseCreateDto);
+    @PostMapping("/{externalWorkoutId}/workoutExercise")
+    public ResponseEntity<WorkoutExerciseResponseDto> createWorkoutExerciseForUser(@PathVariable UUID externalWorkoutId, @RequestBody WorkoutExerciseCreateDto workoutExerciseCreateDto){
+        WorkoutExerciseResponseDto createdWorkoutExercise = userClient.userCreateWorkoutExercise(externalWorkoutId, workoutExerciseCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkoutExercise);
     }
 

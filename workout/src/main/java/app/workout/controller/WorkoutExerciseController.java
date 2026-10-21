@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/workoutExercise")
@@ -23,9 +24,9 @@ public class WorkoutExerciseController {
         return ResponseEntity.ok(workoutExerciseService.getAllWorkoutSessions());
     }
 
-    @PostMapping
-    public ResponseEntity<WorkoutExerciseResponseDto> createWorkoutSession(@RequestBody WorkoutExerciseCreateDto workoutExerciseCreateDto){
-        WorkoutExerciseResponseDto createdWorkoutSession = workoutExerciseService.createWorkoutSession(workoutExerciseCreateDto);
+    @PostMapping("/user/{externalWorkoutId}")
+    public ResponseEntity<WorkoutExerciseResponseDto> createWorkoutSession(@PathVariable UUID externalWorkoutId , @RequestBody WorkoutExerciseCreateDto workoutExerciseCreateDto){
+        WorkoutExerciseResponseDto createdWorkoutSession = workoutExerciseService.createWorkoutSession(externalWorkoutId, workoutExerciseCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkoutSession);
     }
 }

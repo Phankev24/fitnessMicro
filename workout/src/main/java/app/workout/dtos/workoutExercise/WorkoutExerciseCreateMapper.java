@@ -6,6 +6,8 @@ import app.workout.repository.WorkoutRepository;
 import app.workout.service.WorkoutExerciseService;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class WorkoutExerciseCreateMapper {
 
@@ -15,18 +17,17 @@ public class WorkoutExerciseCreateMapper {
         this.workoutRepository = workoutRepository;
     }
 
-    public WorkoutExercise toEntity(WorkoutExerciseCreateDto workoutExerciseCreateDto){
+    public WorkoutExercise toEntity(WorkoutExerciseCreateDto workoutExerciseCreateDto, UUID externalWorkoutId){
         if(workoutExerciseCreateDto == null) return null;
 
-        WorkoutExercise we = new WorkoutExercise();
-        we.setExerciseName(workoutExerciseCreateDto.exerciseName());
+        WorkoutExercise workoutExercise = new WorkoutExercise();
+        workoutExercise.setExerciseName(workoutExerciseCreateDto.exerciseName());
 
-        if(workoutExerciseCreateDto.internalWorkoutId() != null){
-            Workout workout = workoutRepository.findById(workoutExerciseCreateDto.internalWorkoutId())
-                    .orElseThrow(() -> new RuntimeException("Workout not found with this id: " + workoutExerciseCreateDto.internalWorkoutId()));
-            we.setWorkout(workout);
-        }
+        // Find the workout by externalWorkoutId and set the relationship
+        Workout workout = workoutRepository.findByExternalWorkoutId(externalWorkoutId)
+                .orElseThrow(() -> new RuntimeException("Workout not found with externalWorkoutId: " + externalWorkoutId));
+        workoutExercise.setWorkout(workout);
 
-        return we;
+        return workoutExercise;
     }
 }

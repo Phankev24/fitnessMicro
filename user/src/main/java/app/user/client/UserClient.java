@@ -58,10 +58,10 @@ public class UserClient {
 
 
     //TODO: Let user create a workoutExercise from usercommscntroler
-    public WorkoutExerciseResponseDto userCreateWorkoutExercise(WorkoutExerciseCreateDto workoutExerciseCreateDto){
+    public WorkoutExerciseResponseDto userCreateWorkoutExercise(UUID externalWorkoutId, WorkoutExerciseCreateDto workoutExerciseCreateDto){
         HttpEntity<WorkoutExerciseCreateDto> request = new HttpEntity<>(workoutExerciseCreateDto);
         ResponseEntity<WorkoutExerciseResponseDto> response = restTemplate.postForEntity(
-                workoutExerciseServiceUrl,
+                workoutExerciseServiceUrl + "/user/" + externalWorkoutId,
                 request,
                 WorkoutExerciseResponseDto.class
         );

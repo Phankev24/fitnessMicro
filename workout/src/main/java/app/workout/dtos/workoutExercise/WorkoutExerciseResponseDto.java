@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public record WorkoutExerciseResponseDto(
         Long workoutExerciseId,
+        UUID externalWorkoutId,
         String exerciseName,
         List<ExerciseResponseDto> sets
 ) {
