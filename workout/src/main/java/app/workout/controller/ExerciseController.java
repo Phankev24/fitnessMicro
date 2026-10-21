@@ -17,9 +17,9 @@ public class ExerciseController {
         this.exerciseService = exerciseService;
     }
 
-    @PostMapping
-    public ResponseEntity<ExerciseResponseDto> createExercise(@RequestBody ExerciseCreateDto exerciseCreateDto){
-        ExerciseResponseDto createdExercise = exerciseService.createExercise(exerciseCreateDto);
+    @PostMapping("/user/{workoutExerciseId}")
+    public ResponseEntity<ExerciseResponseDto> createExercise(@PathVariable Long workoutExerciseId ,@RequestBody ExerciseCreateDto exerciseCreateDto){
+        ExerciseResponseDto createdExercise = exerciseService.createExercise(workoutExerciseId ,exerciseCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdExercise);
     }
 }
