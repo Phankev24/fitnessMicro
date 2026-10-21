@@ -18,6 +18,7 @@ public class WorkoutExercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long workoutExerciseId;
 
+    private UUID externalWorkoutExerciseId;
     private String exerciseName;
 
     //Bidirectional many workouts map one workout Session
@@ -30,5 +31,12 @@ public class WorkoutExercise {
 
     public WorkoutExercise(String exerciseName) {
         this.exerciseName = exerciseName;
+    }
+
+    @PrePersist
+    public void generateUuid(){
+        if(this.externalWorkoutExerciseId == null){
+            this.externalWorkoutExerciseId = UUID.randomUUID();
+        }
     }
 }

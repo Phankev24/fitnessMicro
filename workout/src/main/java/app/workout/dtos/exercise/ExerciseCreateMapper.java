@@ -5,6 +5,8 @@ import app.workout.entities.WorkoutExercise;
 import app.workout.repository.WorkoutExerciseRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class ExerciseCreateMapper {
 
@@ -14,15 +16,15 @@ public class ExerciseCreateMapper {
         this.workoutExerciseRepository = workoutExerciseRepository;
     }
 
-    public Exercise toEntity(ExerciseCreateDto exerciseCreateDto, Long workoutExerciseId) {
+    public Exercise toEntity(UUID externalWorkoutExerciseId, ExerciseCreateDto exerciseCreateDto) {
         if (exerciseCreateDto == null) return null;
 
         Exercise exercise = new Exercise();
         exercise.setReps(exerciseCreateDto.reps());
         exercise.setWeight(exerciseCreateDto.weight());
 
-        WorkoutExercise workoutExercise = workoutExerciseRepository.findById(workoutExerciseId)
-                .orElseThrow(() -> new RuntimeException("not fuond"));
+        WorkoutExercise workoutExercise = workoutExerciseRepository.findByExternalWorkoutExerciseId(externalWorkoutExerciseId)
+                .orElseThrow(() -> new RuntimeException("not found"));
         exercise.setWorkoutExercise(workoutExercise);
 
         return exercise;

@@ -16,12 +16,13 @@ public class WorkoutResponseMapper {
                 .stream()
                 .map(ws -> new WorkoutExerciseResponseDto(
                         ws.getWorkoutExerciseId(),
+                        ws.getExternalWorkoutExerciseId(),
                         ws.getWorkout().getExternalWorkoutId(), 
                         ws.getExerciseName(),
                         ws.getSets()
                                 .stream()
                                 .map(s -> new ExerciseResponseDto(
-                                        s.getWorkoutExercise() != null ? s.getWorkoutExercise().getWorkoutExerciseId() : null,
+                                        s.getWorkoutExercise() != null ? s.getWorkoutExercise().getExternalWorkoutExerciseId() : null,
                                         s.getExerciseId(),
                                         s.getReps(),
                                         s.getWeight()

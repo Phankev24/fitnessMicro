@@ -75,9 +75,9 @@ public class UserCommunicationController {
 
 
     @Operation(description = "POST a exercise (set) for User, links with workoutExerciseId Currently. later on pathVariable")
-    @PostMapping("/{workoutExerciseId}/exercise")
-    public ResponseEntity<ExerciseResponseDto> createExercise(@PathVariable Long workoutExerciseId, @RequestBody ExerciseCreateDto exerciseCreateDto){
-        ExerciseResponseDto createdExercise = userClient.createExercise(workoutExerciseId, exerciseCreateDto);
+    @PostMapping("/{externalWorkoutExerciseId}/exercise")
+    public ResponseEntity<ExerciseResponseDto> createExercise(@PathVariable UUID externalWorkoutExerciseId, @RequestBody ExerciseCreateDto exerciseCreateDto){
+        ExerciseResponseDto createdExercise = userClient.createExercise(externalWorkoutExerciseId, exerciseCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdExercise);
     }
 }

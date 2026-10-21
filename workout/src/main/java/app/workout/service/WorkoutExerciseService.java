@@ -34,7 +34,7 @@ public class WorkoutExerciseService {
     }
 
     public WorkoutExerciseResponseDto createWorkoutSession(UUID externalWorkoutId, WorkoutExerciseCreateDto workoutExerciseCreateDto){
-        WorkoutExercise workoutExerciseEntity = workoutExerciseCreateMapper.toEntity(workoutExerciseCreateDto, externalWorkoutId);
+        WorkoutExercise workoutExerciseEntity = workoutExerciseCreateMapper.toEntity(externalWorkoutId ,workoutExerciseCreateDto);
         WorkoutExercise savedWorkoutExercise = workoutExerciseRepository.save(workoutExerciseEntity);
         return workoutExerciseResponseMapper.toDTO(savedWorkoutExercise);
     }
