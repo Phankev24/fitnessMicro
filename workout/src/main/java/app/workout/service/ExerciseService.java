@@ -21,8 +21,8 @@ public class ExerciseService {
         this.exerciseResponseMapper = exerciseResponseMapper;
     }
 
-    public ExerciseResponseDto createExercise(ExerciseCreateDto exerciseCreateDto) {
-        Exercise exerciseEntity = exerciseCreateMapper.toEntity(exerciseCreateDto);
+    public ExerciseResponseDto createExercise(Long workoutExerciseId, ExerciseCreateDto exerciseCreateDto) {
+        Exercise exerciseEntity = exerciseCreateMapper.toEntity(exerciseCreateDto, workoutExerciseId);
         Exercise savedExercise = exerciseRepository.save(exerciseEntity);
         return exerciseResponseMapper.toDTO(savedExercise);
     }

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class UserClient {
+public class  UserClient {
     private final RestTemplate restTemplate;
     private final String workoutServiceUrl = "http://localhost:8081/api/workout";
     private final String exerciseServiceUrl = "http://localhost:8081/api/exercise";
@@ -70,10 +70,10 @@ public class UserClient {
 
 
     @Operation(description = "Creates Exercise from user")
-    public ExerciseResponseDto createExercise(ExerciseCreateDto exerciseCreateDto){
+    public ExerciseResponseDto createExercise(Long workoutExerciseId, ExerciseCreateDto exerciseCreateDto){
         HttpEntity<ExerciseCreateDto> request = new HttpEntity<>(exerciseCreateDto);
         ResponseEntity<ExerciseResponseDto> response = restTemplate.postForEntity(
-                exerciseServiceUrl,
+                exerciseServiceUrl + "/user/" + workoutExerciseId,
                 request,
                 ExerciseResponseDto.class
         );
