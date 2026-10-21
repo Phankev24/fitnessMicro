@@ -15,7 +15,7 @@ public class WorkoutResponseMapper {
         List<WorkoutExerciseResponseDto> exerciseDtos = workout.getWorkoutSession()
                 .stream()
                 .map(ws -> new WorkoutExerciseResponseDto(
-                        ws.getWorkoutExerciseId(),
+                        ws.getInternalWorkoutExerciseId(),
                         ws.getExternalWorkoutExerciseId(),
                         ws.getWorkout().getExternalWorkoutId(), 
                         ws.getExerciseName(),
@@ -34,7 +34,7 @@ public class WorkoutResponseMapper {
         return new WorkoutResponseDto(
                 workout.getInternalWorkoutId(),
                 workout.getExternalWorkoutId(),
-                workout.getUserId(),
+                workout.getExternalUserId(),
                 workout.getWorkoutName(),
                 workout.getWorkoutDescription(),
                 workout.getWorkoutDateTime(),

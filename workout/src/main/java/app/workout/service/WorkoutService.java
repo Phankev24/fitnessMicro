@@ -37,9 +37,9 @@ public class WorkoutService {
                 .orElseThrow(() -> new RuntimeException("Workout not found with workoutId: " + workoutId));
     }
 
-    public WorkoutResponseDto createWorkout(UUID userId, WorkoutCreateDto workoutCreateDto){
+    public WorkoutResponseDto createWorkout(UUID externalUserId, WorkoutCreateDto workoutCreateDto){
         Workout workoutEntity = workoutCreateMapper.toEntity(workoutCreateDto);
-        workoutEntity.setUserId(userId);
+        workoutEntity.setExternalUserId(externalUserId);
         Workout savedWorkout = workoutRepository.save(workoutEntity);
         return workoutResponseMapper.toDTO(savedWorkout);
     }
@@ -58,8 +58,8 @@ public class WorkoutService {
         workoutRepository.delete(workout);
     }
 
-    public List<WorkoutResponseDto> getWorkoutByUserId(UUID userId){
-        return workoutRepository.findByUserId(userId)
+    public List<WorkoutResponseDto> getWorkoutByUserId(UUID externalUserId){
+        return workoutRepository.findByExternalUserId(externalUserId)
                 .stream()
                 .map(workoutResponseMapper::toDTO)
                 .toList();

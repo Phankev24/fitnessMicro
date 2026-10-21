@@ -10,7 +10,7 @@ import java.util.UUID;
 public record WorkoutResponseDto(
         Long internalWorkoutId,
         UUID externalWorkoutId,
-        UUID userId,
+        UUID externalUserId,
         String workoutName,
         String workoutDescription,
         LocalDateTime workoutDateTime,

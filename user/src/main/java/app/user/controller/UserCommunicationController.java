@@ -35,7 +35,7 @@ public class UserCommunicationController {
 
         Map<UUID, List<WorkoutResponseDto>> workoutByUserId = allWorkouts
                 .stream()
-                .collect(Collectors.groupingBy(WorkoutResponseDto::userId
+                .collect(Collectors.groupingBy(WorkoutResponseDto::externalUserId
                 ));
 
         List<UserWorkoutResponseDto> result = allUsers
@@ -50,7 +50,7 @@ public class UserCommunicationController {
     }
 
     @Operation(description = "GET one user and their Workout history")
-    @GetMapping("/{userId}/userWorkout")
+    @GetMapping("/{externalUserId}/userWorkout")
     public ResponseEntity<UserWorkoutResponseDto> getUserWithWorkouts(@PathVariable UUID userId){
         UserResponseDto userDto = userService.getUserByExternalId(userId);
         List<WorkoutResponseDto> workouts = userClient.getWorkoutsByUserId(userId);
@@ -59,9 +59,9 @@ public class UserCommunicationController {
     }
 
     @Operation(description = "POST a workout for a User. Links with the users UUID")
-    @PostMapping("/{userId}/workout")
-    public ResponseEntity<WorkoutResponseDto> createWorkoutForUser(@PathVariable UUID userId,@RequestBody WorkoutCreateDto workoutCreateDto) {
-        WorkoutResponseDto createdWorkout = userClient.userCreateWorkout(userId, workoutCreateDto);
+    @PostMapping("/{externalUserId}/workout")
+    public ResponseEntity<WorkoutResponseDto> createWorkoutForUser(@PathVariable UUID externalUserId,@RequestBody WorkoutCreateDto workoutCreateDto) {
+        WorkoutResponseDto createdWorkout = userClient.userCreateWorkout(externalUserId, workoutCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
     }
 

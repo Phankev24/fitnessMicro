@@ -24,7 +24,7 @@ public class Workout {
     private UUID externalWorkoutId;
 
     @Column(nullable = false)
-    private UUID userId;
+    private UUID externalUserId;
 
     private String workoutName;
     private String workoutDescription;
@@ -33,7 +33,6 @@ public class Workout {
     @Enumerated(EnumType.STRING)
     private WorkoutType workoutType;
 
-    //One workout contains many workoutExercises. eg workout Sessions
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkoutExercise> workoutSession = new ArrayList<>();
 

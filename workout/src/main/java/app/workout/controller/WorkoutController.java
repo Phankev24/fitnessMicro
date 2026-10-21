@@ -30,9 +30,9 @@ public class WorkoutController {
         return ResponseEntity.ok(workoutService.getWorkoutById(workoutId));
     }
 
-    @PostMapping("/user/{userId}")
-    public ResponseEntity<WorkoutResponseDto> createWorkout(@PathVariable UUID userId, @RequestBody WorkoutCreateDto workoutCreateDto){
-        WorkoutResponseDto createdWorkout = workoutService.createWorkout(userId, workoutCreateDto);
+    @PostMapping("/user/{externalUserId}")
+    public ResponseEntity<WorkoutResponseDto> createWorkout(@PathVariable UUID externalUserId, @RequestBody WorkoutCreateDto workoutCreateDto){
+        WorkoutResponseDto createdWorkout = workoutService.createWorkout(externalUserId, workoutCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
     }
 
@@ -48,7 +48,7 @@ public class WorkoutController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/user/{externalUserId}")
     public ResponseEntity<List<WorkoutResponseDto>> getWorkoutsByUserId(@PathVariable UUID userId){
         return ResponseEntity.ok(workoutService.getWorkoutByUserId(userId));
     }

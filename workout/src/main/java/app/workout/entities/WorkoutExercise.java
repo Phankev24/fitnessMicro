@@ -16,16 +16,14 @@ import java.util.UUID;
 public class WorkoutExercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long workoutExerciseId;
+    private Long internalWorkoutExerciseId;
 
     private UUID externalWorkoutExerciseId;
     private String exerciseName;
 
-    //Bidirectional many workouts map one workout Session
     @ManyToOne
     private Workout workout;
 
-    //One workoutExercise (workout session) can contain many exercises
     @OneToMany(mappedBy = "workoutExercise", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exercise> sets = new ArrayList<>();
 

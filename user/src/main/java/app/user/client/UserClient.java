@@ -34,8 +34,8 @@ public class  UserClient {
         return response.getBody();
     }
 
-    public List<WorkoutResponseDto> getWorkoutsByUserId(UUID userId){
-        String url = workoutServiceUrl + "/user/" + userId;
+    public List<WorkoutResponseDto> getWorkoutsByUserId(UUID externalUserId){
+        String url = workoutServiceUrl + "/user/" + externalUserId;
         ResponseEntity<List<WorkoutResponseDto>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
