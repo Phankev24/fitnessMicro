@@ -22,6 +22,7 @@ public class WorkoutResponseMapper {
                                 .stream()
                                 .map(s -> new ExerciseResponseDto(
                                         s.getWorkoutExercise() != null ? s.getWorkoutExercise().getWorkoutExerciseId() : null,
+                                        s.getExerciseId(),
                                         s.getReps(),
                                         s.getWeight()
                                 ))

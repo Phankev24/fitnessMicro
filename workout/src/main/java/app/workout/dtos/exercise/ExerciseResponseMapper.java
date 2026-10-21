@@ -14,6 +14,7 @@ public class ExerciseResponseMapper {
 
         return new ExerciseResponseDto(
                 workoutExerciseId,
+                exercise.getExerciseId(),
                 exercise.getReps(),
                 exercise.getWeight()
         );
