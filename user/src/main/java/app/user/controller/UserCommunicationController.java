@@ -2,11 +2,9 @@ package app.user.controller;
 
 import app.user.client.UserClient;
 import app.user.dtos.user.UserResponseDto;
-import app.user.dtos.user.UserWorkoutRequestDto;
-import app.user.dtos.workout.UserWorkoutResponseDto;
-import app.user.dtos.workout.WorkoutCreateDto;
-import app.user.dtos.workout.WorkoutResponseDto;
+import app.user.dtos.workout.*;
 import app.user.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +27,7 @@ public class UserCommunicationController {
         this.userClient = userClient;
     }
 
+    @Operation(description = "GET all users and their workout history")
     @GetMapping("/workout")
     public ResponseEntity<List<UserWorkoutResponseDto>> getAllUsersWithWorkouts(){
         List<UserResponseDto> allUsers = userService.getAllUsers();
@@ -36,19 +35,21 @@ public class UserCommunicationController {
 
         Map<UUID, List<WorkoutResponseDto>> workoutByUserId = allWorkouts
                 .stream()
-                .collect(Collectors.groupingBy(WorkoutResponseDto::userId));
+                .collect(Collectors.groupingBy(WorkoutResponseDto::userId
+                ));
 
         List<UserWorkoutResponseDto> result = allUsers
                 .stream()
                 .map(user -> new UserWorkoutResponseDto(
                         user,
                         workoutByUserId.getOrDefault(user.externalUserId(), Collections.emptyList())
+
                 ))
                 .toList();
         return ResponseEntity.ok(result);
     }
 
-
+    @Operation(description = "GET one user and their Workout history")
     @GetMapping("/{userId}/userWorkout")
     public ResponseEntity<UserWorkoutResponseDto> getUserWithWorkouts(@PathVariable UUID userId){
         UserResponseDto userDto = userService.getUserByExternalId(userId);
@@ -57,17 +58,26 @@ public class UserCommunicationController {
         return ResponseEntity.ok(new UserWorkoutResponseDto(userDto, workouts));
     }
 
-
+    @Operation(description = "POST a workout for a User. Links with the users UUID")
     @PostMapping("/{userId}/workout")
-    public ResponseEntity<WorkoutResponseDto> createWorkoutForUser(@PathVariable UUID userId,@RequestBody UserWorkoutRequestDto userWorkoutRequestDto) {
-        WorkoutCreateDto workoutCreateDto = new WorkoutCreateDto(
-                userId,
-                userWorkoutRequestDto.workoutName(),
-                userWorkoutRequestDto.workoutDescription(),
-                userWorkoutRequestDto.workoutType()
-        );
-
-        WorkoutResponseDto createdWorkout = userClient.userCreateWorkout(workoutCreateDto);
+    public ResponseEntity<WorkoutResponseDto> createWorkoutForUser(@PathVariable UUID userId,@RequestBody WorkoutCreateDto workoutCreateDto) {
+        WorkoutResponseDto createdWorkout = userClient.userCreateWorkout(userId, workoutCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
+    }
+
+
+    @Operation(description = "POST workoutExercise (log) for user")
+    @PostMapping("/{externalWorkoutId}/workoutExercise")
+    public ResponseEntity<WorkoutExerciseResponseDto> createWorkoutExerciseForUser(@PathVariable UUID externalWorkoutId, @RequestBody WorkoutExerciseCreateDto workoutExerciseCreateDto){
+        WorkoutExerciseResponseDto createdWorkoutExercise = userClient.userCreateWorkoutExercise(externalWorkoutId, workoutExerciseCreateDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkoutExercise);
+    }
+
+
+    @Operation(description = "POST a exercise (set) for User, links with workoutExerciseId Currently. later on pathVariable")
+    @PostMapping("/exercise")
+    public ResponseEntity<ExerciseResponseDto> createExercise(@RequestBody ExerciseCreateDto exerciseCreateDto){
+        ExerciseResponseDto createdExercise = userClient.createExercise(exerciseCreateDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdExercise);
     }
 }

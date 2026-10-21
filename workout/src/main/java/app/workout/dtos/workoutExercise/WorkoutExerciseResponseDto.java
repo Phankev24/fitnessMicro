@@ -3,9 +3,11 @@ package app.workout.dtos.workoutExercise;
 import app.workout.dtos.exercise.ExerciseResponseDto;
 
 import java.util.List;
+import java.util.UUID;
 
 public record WorkoutExerciseResponseDto(
         Long workoutExerciseId,
+        UUID externalWorkoutId,
         String exerciseName,
         List<ExerciseResponseDto> sets
 ) {

@@ -1,7 +1,7 @@
 package app.user.client;
 
-import app.user.dtos.workout.WorkoutCreateDto;
-import app.user.dtos.workout.WorkoutResponseDto;
+import app.user.dtos.workout.*;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -17,6 +17,8 @@ import java.util.UUID;
 public class UserClient {
     private final RestTemplate restTemplate;
     private final String workoutServiceUrl = "http://localhost:8081/api/workout";
+    private final String exerciseServiceUrl = "http://localhost:8081/api/exercise";
+    private final String workoutExerciseServiceUrl = "http://localhost:8081/api/workoutExercise";
 
     public UserClient(RestTemplateBuilder builder){
         this.restTemplate = builder.build();
@@ -43,12 +45,37 @@ public class UserClient {
         return response.getBody();
     }
 
-    public WorkoutResponseDto userCreateWorkout(WorkoutCreateDto workoutCreateDto){
+    public WorkoutResponseDto userCreateWorkout(UUID userId, WorkoutCreateDto workoutCreateDto){
         HttpEntity<WorkoutCreateDto> request = new HttpEntity<>(workoutCreateDto);
         ResponseEntity<WorkoutResponseDto> response = restTemplate.postForEntity(
-                workoutServiceUrl,
+                workoutServiceUrl + "/user/" + userId,
                 request,
                 WorkoutResponseDto.class
+        );
+        return response.getBody();
+    }
+
+
+
+    //TODO: Let user create a workoutExercise from usercommscntroler
+    public WorkoutExerciseResponseDto userCreateWorkoutExercise(UUID externalWorkoutId, WorkoutExerciseCreateDto workoutExerciseCreateDto){
+        HttpEntity<WorkoutExerciseCreateDto> request = new HttpEntity<>(workoutExerciseCreateDto);
+        ResponseEntity<WorkoutExerciseResponseDto> response = restTemplate.postForEntity(
+                workoutExerciseServiceUrl + "/user/" + externalWorkoutId,
+                request,
+                WorkoutExerciseResponseDto.class
+        );
+        return response.getBody();
+    }
+
+
+    @Operation(description = "Creates Exercise from user")
+    public ExerciseResponseDto createExercise(ExerciseCreateDto exerciseCreateDto){
+        HttpEntity<ExerciseCreateDto> request = new HttpEntity<>(exerciseCreateDto);
+        ResponseEntity<ExerciseResponseDto> response = restTemplate.postForEntity(
+                exerciseServiceUrl,
+                request,
+                ExerciseResponseDto.class
         );
         return response.getBody();
     }

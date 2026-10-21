@@ -3,8 +3,10 @@ package app.workout.repository;
 import app.workout.entities.Workout;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface WorkoutRepository extends JpaRepository<Workout, Long> {
     List<Workout> findByUserId(UUID userId);
+    Optional<Workout> findByExternalWorkoutId(UUID externalWorkoutId);
 }

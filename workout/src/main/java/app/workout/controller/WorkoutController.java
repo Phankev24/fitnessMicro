@@ -30,9 +30,9 @@ public class WorkoutController {
         return ResponseEntity.ok(workoutService.getWorkoutById(workoutId));
     }
 
-    @PostMapping
-    public ResponseEntity<WorkoutResponseDto> createWorkout(@RequestBody WorkoutCreateDto workoutCreateDto){
-        WorkoutResponseDto createdWorkout = workoutService.createWorkout(workoutCreateDto);
+    @PostMapping("/user/{userId}")
+    public ResponseEntity<WorkoutResponseDto> createWorkout(@PathVariable UUID userId, @RequestBody WorkoutCreateDto workoutCreateDto){
+        WorkoutResponseDto createdWorkout = workoutService.createWorkout(userId, workoutCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
     }
 

@@ -22,6 +22,7 @@ public class WorkoutExerciseResponseMapper {
 
         return new WorkoutExerciseResponseDto(
                 workoutExercise.getWorkoutExerciseId(),
+                workoutExercise.getWorkout().getExternalWorkoutId(),
                 workoutExercise.getExerciseName(),
                 setDtos
         );

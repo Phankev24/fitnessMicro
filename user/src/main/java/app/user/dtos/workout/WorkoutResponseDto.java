@@ -4,6 +4,7 @@ import app.user.enums.WorkoutType;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public record WorkoutResponseDto(
@@ -13,5 +14,6 @@ public record WorkoutResponseDto(
         String workoutName,
         String workoutDescription,
         LocalDateTime workoutDateTime,
-        WorkoutType workoutType
+        WorkoutType workoutType,
+        List<WorkoutExerciseResponseDto>workoutSession
 ){}
