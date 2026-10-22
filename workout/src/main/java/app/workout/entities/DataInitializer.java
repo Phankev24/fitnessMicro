@@ -22,7 +22,7 @@ public class DataInitializer {
             // --- Workout 1: Upper Day ---
             Workout workout1 = new Workout();
             workout1.setExternalWorkoutId(UUID.fromString("3fa85f64-5717-4562-b3fc-2c963f66afa6"));
-            workout1.setExternalUserId(UUID.fromString("a963d9c1-4094-420b-8c40-1b16d3131d2c"));
+            workout1.setExternalUserId(UUID.fromString("9abd6f56-9a62-4f25-96c8-afbdf742aa0c"));
             workout1.setWorkoutName("Upper Day");
             workout1.setWorkoutDescription("Working on upper body today - specifically chest and back.");
             workout1.setWorkoutType(WorkoutType.STRENGTH);
@@ -31,7 +31,7 @@ public class DataInitializer {
             // --- Workout 2: Leg Day ---
             Workout workout2 = new Workout();
             workout2.setExternalWorkoutId(UUID.fromString("4fa85f64-5717-4562-b3fc-2c963f66afa6"));
-            workout2.setExternalUserId(UUID.fromString("9abd6f56-9a62-4f25-96c8-afbdf742aa0c"));
+            workout2.setExternalUserId(UUID.fromString("92d82076-01a3-41ae-89ed-7bc138bde54f"));
             workout2.setWorkoutName("Leg Day");
             workout2.setWorkoutDescription("Working out the legs - focus on the quads.");
             workout2.setWorkoutType(WorkoutType.STRENGTH);
@@ -47,7 +47,7 @@ public class DataInitializer {
             // --- Workout 3: Shoulders ---
             Workout workout3 = new Workout();
             workout3.setExternalWorkoutId(UUID.fromString("5f3b7d66-39c7-471a-8017-31635972f1a6"));
-            workout3.setExternalUserId(UUID.fromString("92d82076-01a3-41ae-89ed-7bc138bde54f"));
+            workout3.setExternalUserId(UUID.fromString("82df388a-a1cd-47c0-9e6d-78d5b6bbbf7d"));
             workout3.setWorkoutName("Shoulders");
             workout3.setWorkoutDescription("Working on them shoulders.");
             workout3.setWorkoutType(WorkoutType.STRENGTH);

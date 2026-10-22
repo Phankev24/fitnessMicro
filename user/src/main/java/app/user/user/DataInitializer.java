@@ -41,9 +41,19 @@ public class DataInitializer {
             user3.setPassword("whatthadogdoin");
             user3.setPhoneNumber("9888838");
 
+            User user4 = new User();
+            user4.setExternalUserId(UUID.fromString("82df388a-a1cd-47c0-9e6d-78d5b6bbbf7d"));
+            user4.setUserName("JavaMan");
+            user4.setFirstName("Grant");
+            user4.setLastName("Hill");
+            user4.setEmail("shamrock4000@gmail.com");
+            user4.setPassword("LBJ");
+            user4.setPhoneNumber("43245644");
+
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);
+            userRepository.save(user4);
 
             System.out.println("Sample H2 data initialized!");
         };
