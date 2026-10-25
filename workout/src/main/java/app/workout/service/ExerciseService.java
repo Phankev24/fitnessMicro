@@ -8,6 +8,8 @@ import app.workout.entities.Exercise;
 import app.workout.repository.ExerciseRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ExerciseService {
 
@@ -21,8 +23,8 @@ public class ExerciseService {
         this.exerciseResponseMapper = exerciseResponseMapper;
     }
 
-    public ExerciseResponseDto createExercise(Long workoutExerciseId, ExerciseCreateDto exerciseCreateDto) {
-        Exercise exerciseEntity = exerciseCreateMapper.toEntity(exerciseCreateDto, workoutExerciseId);
+    public ExerciseResponseDto createExercise(UUID externalWorkoutExerciseId, ExerciseCreateDto exerciseCreateDto) {
+        Exercise exerciseEntity = exerciseCreateMapper.toEntity(externalWorkoutExerciseId ,exerciseCreateDto);
         Exercise savedExercise = exerciseRepository.save(exerciseEntity);
         return exerciseResponseMapper.toDTO(savedExercise);
     }

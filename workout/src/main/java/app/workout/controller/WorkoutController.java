@@ -25,30 +25,30 @@ public class WorkoutController {
         return ResponseEntity.ok(workoutService.getAllWorkouts());
     }
 
-    @GetMapping("/{workoutId}")
-    public ResponseEntity<WorkoutResponseDto> getWorkoutById(@PathVariable Long workoutId){
-        return ResponseEntity.ok(workoutService.getWorkoutById(workoutId));
+    @GetMapping("/{externalWorkoutId}")
+    public ResponseEntity<WorkoutResponseDto> getWorkoutById(@PathVariable UUID externalWorkoutId){
+        return ResponseEntity.ok(workoutService.getWorkoutById(externalWorkoutId));
     }
 
-    @PostMapping("/user/{userId}")
-    public ResponseEntity<WorkoutResponseDto> createWorkout(@PathVariable UUID userId, @RequestBody WorkoutCreateDto workoutCreateDto){
-        WorkoutResponseDto createdWorkout = workoutService.createWorkout(userId, workoutCreateDto);
+    @PostMapping("/user/{externalUserId}")
+    public ResponseEntity<WorkoutResponseDto> createWorkout(@PathVariable UUID externalUserId, @RequestBody WorkoutCreateDto workoutCreateDto){
+        WorkoutResponseDto createdWorkout = workoutService.createWorkout(externalUserId, workoutCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
     }
 
-    @PatchMapping("/{workoutId}")
-    public ResponseEntity<WorkoutResponseDto> updateWorkout(@PathVariable Long workoutId, @RequestBody WorkoutUpdateDto workoutUpdateDto){
-        WorkoutResponseDto updatedWorkout = workoutService.updateWorkout(workoutId, workoutUpdateDto);
+    @PatchMapping("/{externalWorkoutId}")
+    public ResponseEntity<WorkoutResponseDto> updateWorkout(@PathVariable UUID externalWorkoutId, @RequestBody WorkoutUpdateDto workoutUpdateDto){
+        WorkoutResponseDto updatedWorkout = workoutService.updateWorkout(externalWorkoutId, workoutUpdateDto);
         return ResponseEntity.ok(updatedWorkout);
     }
 
-    @DeleteMapping("/{workoutId}")
-    public ResponseEntity<String> deleteWorkout(@PathVariable Long workoutId){
-        workoutService.deleteWorkout(workoutId);
+    @DeleteMapping("/{externalWorkoutId}")
+    public ResponseEntity<String> deleteWorkout(@PathVariable UUID externalWorkoutId){
+        workoutService.deleteWorkout(externalWorkoutId);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/user/{externalUserId}")
     public ResponseEntity<List<WorkoutResponseDto>> getWorkoutsByUserId(@PathVariable UUID userId){
         return ResponseEntity.ok(workoutService.getWorkoutByUserId(userId));
     }

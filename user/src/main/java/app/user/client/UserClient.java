@@ -34,8 +34,8 @@ public class  UserClient {
         return response.getBody();
     }
 
-    public List<WorkoutResponseDto> getWorkoutsByUserId(UUID userId){
-        String url = workoutServiceUrl + "/user/" + userId;
+    public List<WorkoutResponseDto> getWorkoutsByUserId(UUID externalUserId){
+        String url = workoutServiceUrl + "/user/" + externalUserId;
         ResponseEntity<List<WorkoutResponseDto>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -70,10 +70,10 @@ public class  UserClient {
 
 
     @Operation(description = "Creates Exercise from user")
-    public ExerciseResponseDto createExercise(Long workoutExerciseId, ExerciseCreateDto exerciseCreateDto){
+    public ExerciseResponseDto createExercise(UUID externalWorkoutExerciseId, ExerciseCreateDto exerciseCreateDto){
         HttpEntity<ExerciseCreateDto> request = new HttpEntity<>(exerciseCreateDto);
         ResponseEntity<ExerciseResponseDto> response = restTemplate.postForEntity(
-                exerciseServiceUrl + "/user/" + workoutExerciseId,
+                exerciseServiceUrl + "/user/" + externalWorkoutExerciseId,
                 request,
                 ExerciseResponseDto.class
         );

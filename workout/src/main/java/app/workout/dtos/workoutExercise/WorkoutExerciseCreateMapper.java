@@ -17,13 +17,12 @@ public class WorkoutExerciseCreateMapper {
         this.workoutRepository = workoutRepository;
     }
 
-    public WorkoutExercise toEntity(WorkoutExerciseCreateDto workoutExerciseCreateDto, UUID externalWorkoutId){
+    public WorkoutExercise toEntity(UUID externalWorkoutId, WorkoutExerciseCreateDto workoutExerciseCreateDto){
         if(workoutExerciseCreateDto == null) return null;
 
         WorkoutExercise workoutExercise = new WorkoutExercise();
         workoutExercise.setExerciseName(workoutExerciseCreateDto.exerciseName());
 
-        // Find the workout by externalWorkoutId and set the relationship
         Workout workout = workoutRepository.findByExternalWorkoutId(externalWorkoutId)
                 .orElseThrow(() -> new RuntimeException("Workout not found with externalWorkoutId: " + externalWorkoutId));
         workoutExercise.setWorkout(workout);

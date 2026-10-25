@@ -14,14 +14,16 @@ public class WorkoutExerciseResponseMapper {
         List<ExerciseResponseDto> setDtos = workoutExercise.getSets()
                 .stream()
                 .map(s -> new ExerciseResponseDto(
-                        s.getWorkoutExercise() != null ? s.getWorkoutExercise().getWorkoutExerciseId() : null,
+                        s.getWorkoutExercise() != null ? s.getWorkoutExercise().getExternalWorkoutExerciseId() : null,
+                        s.getExerciseId(),
                         s.getReps(),
                         s.getWeight()
                 ))
                 .toList();
 
         return new WorkoutExerciseResponseDto(
-                workoutExercise.getWorkoutExerciseId(),
+                workoutExercise.getInternalWorkoutExerciseId(),
+                workoutExercise.getExternalWorkoutExerciseId(),
                 workoutExercise.getWorkout().getExternalWorkoutId(),
                 workoutExercise.getExerciseName(),
                 setDtos
