@@ -31,6 +31,8 @@ public class WorkoutExerciseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkoutSession);
     }
 
+    @PatchMapping("/")
+
     @DeleteMapping("/{internalWorkoutExerciseId}")
     public ResponseEntity<String> deleteWorkoutExercise(@PathVariable Long internalWorkoutExerciseId){
         workoutExerciseService.deleteWorkoutExercise(internalWorkoutExerciseId);

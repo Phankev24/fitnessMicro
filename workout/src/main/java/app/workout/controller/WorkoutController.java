@@ -36,15 +36,15 @@ public class WorkoutController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
     }
 
-    @PatchMapping("/{workoutId}")
-    public ResponseEntity<WorkoutResponseDto> updateWorkout(@PathVariable Long workoutId, @RequestBody WorkoutUpdateDto workoutUpdateDto){
-        WorkoutResponseDto updatedWorkout = workoutService.updateWorkout(workoutId, workoutUpdateDto);
+    @PatchMapping("/{externalWorkoutId}")
+    public ResponseEntity<WorkoutResponseDto> updateWorkout(@PathVariable UUID externalWorkoutId, @RequestBody WorkoutUpdateDto workoutUpdateDto){
+        WorkoutResponseDto updatedWorkout = workoutService.updateWorkout(externalWorkoutId, workoutUpdateDto);
         return ResponseEntity.ok(updatedWorkout);
     }
 
-    @DeleteMapping("/{workoutId}")
-    public ResponseEntity<String> deleteWorkout(@PathVariable Long workoutId){
-        workoutService.deleteWorkout(workoutId);
+    @DeleteMapping("/{externalWorkoutId}")
+    public ResponseEntity<String> deleteWorkout(@PathVariable UUID externalWorkoutId){
+        workoutService.deleteWorkout(externalWorkoutId);
         return ResponseEntity.noContent().build();
     }
 

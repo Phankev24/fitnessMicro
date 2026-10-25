@@ -44,17 +44,17 @@ public class WorkoutService {
         return workoutResponseMapper.toDTO(savedWorkout);
     }
 
-    public WorkoutResponseDto updateWorkout(Long id, WorkoutUpdateDto workoutUpdateDto) {
-        Workout workout = workoutRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Workout not found with this id: " + id));
+    public WorkoutResponseDto updateWorkout(UUID externalWorkoutId, WorkoutUpdateDto workoutUpdateDto) {
+        Workout workout = workoutRepository.findByExternalWorkoutId(externalWorkoutId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Workout not found with this id: " + externalWorkoutId));
         workoutUpdateMapper.updateEntityFromDto(workoutUpdateDto, workout);
         Workout updatedWorkout = workoutRepository.save(workout);
         return workoutResponseMapper.toDTO(updatedWorkout);
     }
 
-    public void deleteWorkout(Long workoutId){
-        Workout workout = workoutRepository.findById(workoutId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Workout not found: " + workoutId));
+    public void deleteWorkout(UUID externalWorkoutId){
+        Workout workout = workoutRepository.findByExternalWorkoutId(externalWorkoutId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Workout not found: " + externalWorkoutId));
         workoutRepository.delete(workout);
     }
 
