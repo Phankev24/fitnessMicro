@@ -31,10 +31,10 @@ public class WorkoutService {
                 .toList();
     }
 
-    public WorkoutResponseDto getWorkoutById(Long workoutId){
-        return workoutRepository.findById(workoutId)
+    public WorkoutResponseDto getWorkoutById(UUID externalWorkoutId){
+        return workoutRepository.findByExternalWorkoutId(externalWorkoutId)
                 .map(workoutResponseMapper::toDTO)
-                .orElseThrow(() -> new RuntimeException("Workout not found with workoutId: " + workoutId));
+                .orElseThrow(() -> new RuntimeException("Workout not found with workoutId: " + externalWorkoutId));
     }
 
     public WorkoutResponseDto createWorkout(UUID externalUserId, WorkoutCreateDto workoutCreateDto){

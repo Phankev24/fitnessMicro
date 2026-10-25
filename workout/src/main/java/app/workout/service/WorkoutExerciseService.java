@@ -1,13 +1,9 @@
 package app.workout.service;
 
-import app.workout.dtos.workoutExercise.WorkoutExerciseCreateDto;
-import app.workout.dtos.workoutExercise.WorkoutExerciseCreateMapper;
-import app.workout.dtos.workoutExercise.WorkoutExerciseResponseDto;
-import app.workout.dtos.workoutExercise.WorkoutExerciseResponseMapper;
+import app.workout.dtos.workoutExercise.*;
 import app.workout.entities.WorkoutExercise;
 import app.workout.repository.WorkoutExerciseRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,11 +15,14 @@ public class WorkoutExerciseService {
     private final WorkoutExerciseRepository workoutExerciseRepository;
     private final WorkoutExerciseResponseMapper workoutExerciseResponseMapper;
     private final WorkoutExerciseCreateMapper workoutExerciseCreateMapper;
+    private final WorkoutExerciseUpdateMapper workoutExerciseUpdateMapper;
 
-    public WorkoutExerciseService(WorkoutExerciseRepository workoutExerciseRepository, WorkoutExerciseResponseMapper workoutExerciseResponseMapper, WorkoutExerciseCreateMapper workoutExerciseCreateMapper) {
+
+    public WorkoutExerciseService(WorkoutExerciseRepository workoutExerciseRepository, WorkoutExerciseResponseMapper workoutExerciseResponseMapper, WorkoutExerciseCreateMapper workoutExerciseCreateMapper, WorkoutExerciseUpdateMapper workoutExerciseUpdateMapper) {
         this.workoutExerciseRepository = workoutExerciseRepository;
         this.workoutExerciseResponseMapper = workoutExerciseResponseMapper;
         this.workoutExerciseCreateMapper = workoutExerciseCreateMapper;
+        this.workoutExerciseUpdateMapper = workoutExerciseUpdateMapper;
     }
 
     public List<WorkoutExerciseResponseDto> getAllWorkoutSessions(){
@@ -39,8 +38,16 @@ public class WorkoutExerciseService {
         return workoutExerciseResponseMapper.toDTO(savedWorkoutExercise);
     }
 
-    public void deleteWorkoutExercise(Long internalWorkoutExerciseId){
-        WorkoutExercise workoutExercise = workoutExerciseRepository.findById(internalWorkoutExerciseId)
+    public WorkoutExerciseResponseDto updateWorkoutExercise(UUID externalWorkoutExerciseId, WorkoutExerciseResponseDto workoutExerciseUpdateDto){
+        WorkoutExercise workoutExercise = workoutExerciseRepository.findByExternalWorkoutExerciseId(externalWorkoutExerciseId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "WorkoutExercise not found with id: " + externalWorkoutExerciseId));
+        workoutExerciseUpdateMapper.updateEntityFromDto(workoutExerciseUpdateDto, workoutExercise);
+        WorkoutExercise updatedWorkoutExercise = workoutExerciseRepository.save(workoutExercise);
+        return workoutExerciseResponseMapper.toDTO(updatedWorkoutExercise);
+    }
+
+    public void deleteWorkoutExercise(UUID externalWorkoutExerciseId){
+        WorkoutExercise workoutExercise = workoutExerciseRepository.findByExternalWorkoutExerciseId(externalWorkoutExerciseId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         workoutExerciseRepository.delete(workoutExercise);
     }

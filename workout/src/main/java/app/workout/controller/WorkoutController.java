@@ -25,9 +25,9 @@ public class WorkoutController {
         return ResponseEntity.ok(workoutService.getAllWorkouts());
     }
 
-    @GetMapping("/{workoutId}")
-    public ResponseEntity<WorkoutResponseDto> getWorkoutById(@PathVariable Long workoutId){
-        return ResponseEntity.ok(workoutService.getWorkoutById(workoutId));
+    @GetMapping("/{externalWorkoutId}")
+    public ResponseEntity<WorkoutResponseDto> getWorkoutById(@PathVariable UUID externalWorkoutId){
+        return ResponseEntity.ok(workoutService.getWorkoutById(externalWorkoutId));
     }
 
     @PostMapping("/user/{externalUserId}")
