@@ -55,9 +55,6 @@ public class  UserClient {
         return response.getBody();
     }
 
-
-
-    //TODO: Let user create a workoutExercise from usercommscntroler
     public WorkoutExerciseResponseDto userCreateWorkoutExercise(UUID externalWorkoutId, WorkoutExerciseCreateDto workoutExerciseCreateDto){
         HttpEntity<WorkoutExerciseCreateDto> request = new HttpEntity<>(workoutExerciseCreateDto);
         ResponseEntity<WorkoutExerciseResponseDto> response = restTemplate.postForEntity(
@@ -68,8 +65,6 @@ public class  UserClient {
         return response.getBody();
     }
 
-
-    @Operation(description = "Creates Exercise from user")
     public ExerciseResponseDto createExercise(UUID externalWorkoutExerciseId, ExerciseCreateDto exerciseCreateDto){
         HttpEntity<ExerciseCreateDto> request = new HttpEntity<>(exerciseCreateDto);
         ResponseEntity<ExerciseResponseDto> response = restTemplate.postForEntity(
@@ -78,5 +73,15 @@ public class  UserClient {
                 ExerciseResponseDto.class
         );
         return response.getBody();
+    }
+
+    public void deleteWorkout(UUID externalWorkoutId){
+        String url = workoutServiceUrl + "/" + externalWorkoutId;
+        restTemplate.exchange(
+                url,
+                HttpMethod.DELETE,
+                null,
+                Void.class
+        );
     }
 }

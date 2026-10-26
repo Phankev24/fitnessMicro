@@ -80,4 +80,11 @@ public class UserCommunicationController {
         ExerciseResponseDto createdExercise = userClient.createExercise(externalWorkoutExerciseId, exerciseCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdExercise);
     }
+
+    @Operation(description = "DELETE a workout by its UUID")
+    @DeleteMapping("/{externalWorkoutId}")
+    public ResponseEntity<Void> deleteWorkout(@PathVariable UUID externalWorkoutId){
+        userClient.deleteWorkout(externalWorkoutId);
+        return ResponseEntity.noContent().build();
+    }
 }
